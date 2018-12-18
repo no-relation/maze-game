@@ -12,12 +12,12 @@ Heirarchy:
     * Player
     
 Relationships: 
-Maze -< Tiles
-Maze -< Attempts >- Player
+* Maze -< Tiles
+* Maze -< Attempts >- Player
 
 Attempts keep track of number of steps, lower is better. Low scores are recorded
 
-Authentication: to be determined
+Authentication: users login, use JWT and bcrypt
 
 Data persistence: PostGres? SQL3?
   * Users can log in and see their best scores, compared to other users
@@ -28,5 +28,6 @@ Routing: ~~routes are reflected in the url, e.g. /mazes/35/x3/y7~~
 Styling: ???
 
 Stretch goals: 
+  * guest users can try mazes but can't post scores
   * visually differentiating the tiles
   * animated character (Josh sprite?)
