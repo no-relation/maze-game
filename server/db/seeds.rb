@@ -14,6 +14,3 @@ player1 = Player.create(username: "alan", email: "alan@example.com")
 player2 = Player.create(username: "bilikis", email: "bilikis@example.com")
 player3 = Player.create(username: "eddie", email: "eddie@example.com")
 player4 = Player.create(username: "john", email: "john@example.com")
-
-Maze.create
-
