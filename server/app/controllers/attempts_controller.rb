@@ -1,2 +1,0 @@
-class AttemptsController < ApplicationController
-end
