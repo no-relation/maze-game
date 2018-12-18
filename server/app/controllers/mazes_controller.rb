@@ -1,2 +1,0 @@
-class MazesController < ApplicationController
-end
