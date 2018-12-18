@@ -35,4 +35,5 @@ Styling: ???
 Stretch goals: 
   * guest users can try mazes but can't post scores
   * visually differentiating the tiles
+  * leaderboard for each maze with top times, instead of single best time
   * animated character (Josh sprite?)
