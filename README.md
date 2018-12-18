@@ -1,16 +1,21 @@
 # maze-game
 Mod 4 project: a maze game in React
 
-A maze is generated with random tiles. Tiles are generated/fetched from the backend
+A new maze is generated with forked ruby code and stored in backend
 
 Tiles know where in the maze they are, what exits they have, and if they are the exit. Users can see a 3x3 set of tiles at any given time.
 
-Heirarchy:
+React Heirarchy:
   * App
     * Maze
       * Tile
     * Player
     
+Rails Models:
+  * User: name, email, password_digest
+  * Maze: layout (array of arrays), shortest route?, leaderboard (hash)
+  * Attempts: maze id (foreign key), user id (foreign key), current score(step count or time?)
+
 Relationships: 
 * Maze -< Tiles
 * Maze -< Attempts >- Player
