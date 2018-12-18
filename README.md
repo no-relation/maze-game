@@ -22,7 +22,8 @@ Authentication: to be determined
 Data persistence: PostGres? SQL3?
   * Users can log in and see their best scores, compared to other users
 
-Routing: routes are reflected in the url, e.g. /mazes/35/x3/y7
+Routing: ~~routes are reflected in the url, e.g. /mazes/35/x3/y7~~
+  generated mazes have an ID, which means a permanent, sharable URL
 
 Styling: ???
 
