@@ -1,4 +1,5 @@
 class Api::V1::MazesController < Api::V1::ApplicationController
+
     before_action :define_current_maze
 
     skip_before_action :check_authentication, only: [ :index ]
@@ -13,7 +14,7 @@ class Api::V1::MazesController < Api::V1::ApplicationController
     end
     
     def show
-        render json: current_maze
+        render json: Maze.find(params[:id]), methods: [ :nodes, :start_node, :end_node ]
     end
     
     def update
@@ -41,5 +42,4 @@ class Api::V1::MazesController < Api::V1::ApplicationController
     def current_maze
         @current_maze
     end
-
 end

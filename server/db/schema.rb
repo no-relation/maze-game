@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_233522) do
+ActiveRecord::Schema.define(version: 2018_12_19_161928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,12 +25,26 @@ ActiveRecord::Schema.define(version: 2018_12_18_233522) do
   end
 
   create_table "mazes", force: :cascade do |t|
-    t.string "layout", array: true
-    t.string "high_score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "rows"
     t.integer "columns"
+    t.integer "high_score"
+    t.bigint "start_node_id"
+    t.bigint "end_node_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["end_node_id"], name: "index_mazes_on_end_node_id"
+    t.index ["start_node_id"], name: "index_mazes_on_start_node_id"
+  end
+
+  create_table "nodes", force: :cascade do |t|
+    t.integer "row"
+    t.integer "col"
+    t.bigint "maze_id"
+    t.integer "north_neighbor"
+    t.integer "east_neighbor"
+    t.integer "south_neighbor"
+    t.integer "west_neighbor"
+    t.index ["maze_id"], name: "index_nodes_on_maze_id"
   end
 
   create_table "players", force: :cascade do |t|
