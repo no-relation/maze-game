@@ -42,4 +42,5 @@ class Api::V1::MazesController < Api::V1::ApplicationController
     def current_maze
         @current_maze
     end
+
 end

@@ -30,7 +30,6 @@ class Maze < ApplicationRecord
     @end_node = @maze[rand(@rows)][@cols - 1]
     super( { nodes: nodes })
     self.generate
-    byebug
     self.start_node = @start_node
     self.end_node = @end_node
     self.save
