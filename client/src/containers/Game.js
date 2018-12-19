@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Maze } from "../components/Maze";
-import { PlayerEdit } from "../components/PlayerEdit";
-import { Player } from "../components/Player";
+// import { PlayerEdit } from "../components/PlayerEdit";
+// import { Player } from "../components/Player";
 
 export class Game extends Component {
 
@@ -12,6 +12,7 @@ export class Game extends Component {
     render() {
         return (
             <div>
+                <button >Start</button>
                 <Maze />
             </div>
         )
