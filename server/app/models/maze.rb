@@ -13,27 +13,28 @@ class Maze < ApplicationRecord
   DIRECTIONS = [[-1, 0], [1, 0], [0, -1], [0, 1]]
 
   def initialize(attributes = {})
-    @rows = attributes[:rows].to_i
-    @cols = attributes[:columns].to_i
-    nodes = []
-    # Initialize the maze with a bunch of un-connected nodes
-    @maze = Array.new(@rows) do |r|
-      Array.new(@cols) do |c|
-        node = Node.new({row: r, col: c})
-        nodes << node
-        node
+    if attributes
+      @rows = attributes[:rows].to_i
+      @cols = attributes[:columns].to_i
+      nodes = []
+      # Initialize the maze with a bunch of un-connected nodes
+      @maze = Array.new(@rows) do |r|
+        Array.new(@cols) do |c|
+          node = Node.new({row: r, col: c})
+          nodes << node
+          node
+        end
       end
-    end
 
-    # Pick start and end nodes on opposite ends.
-    @start_node = @maze[rand(@rows)][0]
-    @end_node = @maze[rand(@rows)][@cols - 1]
-    super( { nodes: nodes })
-    self.generate
-    byebug
-    self.start_node = @start_node
-    self.end_node = @end_node
-    self.save
+      # Pick start and end nodes on opposite ends.
+      @start_node = @maze[rand(@rows)][0]
+      @end_node = @maze[rand(@rows)][@cols - 1]
+      super( { nodes: nodes })
+      self.generate
+      self.start_node = @start_node
+      self.end_node = @end_node
+      self.save
+    end
   end
 
 

@@ -13,5 +13,4 @@ class Api::V1::AuthController < Api::V1::ApplicationController
             }
         end
     end
-
 end

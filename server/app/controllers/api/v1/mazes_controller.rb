@@ -2,7 +2,7 @@ class Api::V1::MazesController < Api::V1::ApplicationController
 
     before_action :define_current_maze
 
-    skip_before_action :check_authentication, only: [ :index ]
+    # skip_before_action :check_authentication, only: [ :index ]
     
     def create
         maze = Maze.create(maze_params)
@@ -28,7 +28,7 @@ class Api::V1::MazesController < Api::V1::ApplicationController
     end
     
     def maze_params
-        params.permit(:layout, :high_score)
+        params.permit(:rows, :columns, :high_score)
     end
     
     def define_current_maze
@@ -42,4 +42,5 @@ class Api::V1::MazesController < Api::V1::ApplicationController
     def current_maze
         @current_maze
     end
+
 end

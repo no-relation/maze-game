@@ -1,7 +1,7 @@
 class Api::V1::AttemptsController < Api::V1::ApplicationController
     before_action :define_current_attempt
 
-    skip_before_action :check_authentication, only: [ :index ]
+    # skip_before_action :check_authentication, only: [ :index ]
     
     def create
         attempt = Attempt.create(attempt_params)
@@ -41,5 +41,5 @@ class Api::V1::AttemptsController < Api::V1::ApplicationController
     def current_attempt
         @current_attempt
     end
-
+ 
 end
