@@ -1,40 +1,8 @@
 class Maze < ApplicationRecord
     has_many :attempts
     has_many :players, through: :attempts
-    #
-    # A node is both a member of a directed graph, and a cell on an x,y
-    # plane of possibly-connected maze passages.
-    #
-    class Node
-        attr_accessor :row, :col, :visited, :neighbors, :on_path
-    
-        def initialize(row, col)
-            @row = row
-            @col = col
-            @visited = false
-            @on_path = false
-            @neighbors = {north: nil, east: nil, south: nil, west: nil}
-        end
-    
-        # Connect this node to another node. The other node can only fit
-        # in one of four cardinal directions from this node: North, South,
-        # East, or West.
-        def connect_to(other)
-            if other.row == self.row - 1
-            self.neighbors[:north] = other
-            other.neighbors[:south] = self
-            elsif other.row == self.row + 1
-            self.neighbors[:south] = other
-            other.neighbors[:north] = self
-            elsif other.col == self.col + 1
-            self.neighbors[:east] = other
-            other.neighbors[:west] = self
-            elsif other.col == self.col - 1
-            self.neighbors[:west] = other
-            other.neighbors[:east] = self
-            end
-        end
-    end
+    has_many :nodes
+   
     #
     # A Maze is a container for Nodes, and is responsible for:
     #   - generating a maze by connecting unconnected nodes, and
@@ -44,20 +12,21 @@ class Maze < ApplicationRecord
 
   def initialize(attributes = {})
     @rows = attributes[:rows]
-    @cols = attributes[:cols]
+    @cols = attributes[:columns]
     
     # Initialize the maze with a bunch of un-connected nodes
     @maze = Array.new(@rows) do |r|
       Array.new(@cols) do |c|
-        Node.new(r, c)
+        Node.create(r, c, self)
       end
     end
 
     # Pick start and end nodes on opposite ends.
     @start_node = @maze[rand(@rows)][0]
     @end_node = @maze[rand(@rows)][@cols - 1]
+    self.generate
+    super({ start_node: @start_node, end_node: @end_node })
   end
-  
 
 
   # Generate the maze.
@@ -83,7 +52,7 @@ class Maze < ApplicationRecord
         break if !node
       end
     end
-
+    stack
   end
 
   def solve
@@ -154,61 +123,4 @@ class Maze < ApplicationRecord
     neighbors[rand(neighbors.length)]
   end
 
-  def to_s
-    buf = ""
-
-    @maze.each_with_index do |row, idx|
-      # Pass one.
-      row.each do |node|
-        buf << if node.neighbors[:north]
-                 "+   "
-               else
-                 "+---"
-               end
-
-        buf << if node.col == @cols - 1
-                 "+"
-               else
-                 ""
-               end
-      end
-
-      buf << "\r\n"
-
-      # Pass two
-      row.each do |node|
-        buf << if node.neighbors[:west] || node == @start_node
-                 " "
-               else
-                 "|"
-               end
-
-        buf << if node.on_path
-                 " @ "
-               else
-                 "   "
-               end
-
-        if node.col == @cols - 1
-          buf << if node == @end_node
-                   " "
-                 else
-                   "|"
-                 end
-        end
-      end
-
-      buf << "\r\n"
-
-      # Pass three, if last row
-      if idx == @rows - 1
-        row.each do |node|
-          buf << "+---"
-        end
-        buf << "+\r\n"
-      end
-    end
-
-    buf
-  end
 end
