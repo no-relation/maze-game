@@ -2,6 +2,8 @@ class Maze < ApplicationRecord
     has_many :attempts
     has_many :players, through: :attempts
     has_many :nodes
+    belongs_to :start_node, foreign_key: :start_node_id, class_name: "Node"
+    belongs_to :end_node, foreign_key: :end_node_id, class_name: "Node"
    
     #
     # A Maze is a container for Nodes, and is responsible for:
@@ -11,21 +13,27 @@ class Maze < ApplicationRecord
   DIRECTIONS = [[-1, 0], [1, 0], [0, -1], [0, 1]]
 
   def initialize(attributes = {})
-    @rows = attributes[:rows]
-    @cols = attributes[:columns]
-    
+    @rows = attributes[:rows].to_i
+    @cols = attributes[:columns].to_i
+    nodes = []
     # Initialize the maze with a bunch of un-connected nodes
     @maze = Array.new(@rows) do |r|
       Array.new(@cols) do |c|
-        Node.create(r, c, self)
+        node = Node.new({row: r, col: c})
+        nodes << node
+        node
       end
     end
 
     # Pick start and end nodes on opposite ends.
     @start_node = @maze[rand(@rows)][0]
     @end_node = @maze[rand(@rows)][@cols - 1]
+    super( { nodes: nodes })
     self.generate
-    super({ start_node: @start_node, end_node: @end_node })
+    byebug
+    self.start_node = @start_node
+    self.end_node = @end_node
+    self.save
   end
 
 
