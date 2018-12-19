@@ -3,8 +3,6 @@ import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Game } from "./Game";
 // import { Login } from "../components/Login";
-// import { PlayerEdit } from "../components/PlayerEdit";
-// import { Player } from "../components/Player";
 
 class App extends Component {
   render() {
