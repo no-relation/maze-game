@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 2018_12_18_233522) do
   end
 
   create_table "mazes", force: :cascade do |t|
-    t.string "layout", array: true
-    t.string "high_score"
+    t.string "layout"
+    t.string "high_score", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "rows"
