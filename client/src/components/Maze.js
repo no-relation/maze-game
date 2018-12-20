@@ -41,16 +41,45 @@ export class Maze extends Component {
         return tileString
     }
 
+    getGrid() {
+        let gridArray = []
+        for (let i = 0; i < this.state.maze.rows; i++){
+            let rowArray = []
+            for (let j = 0; j < this.state.maze.columns; j++) {
+                this.state.maze.nodes.forEach(node => {
+                    if (node.row === i && node.col === j) {
+                        rowArray.push(node)
+                    }
+                });
+            }
+            gridArray.push(rowArray)
+        }
+        return gridArray
+    }
 
     render() {
         if (this.state.maze) {
-            console.log(this.state.maze.nodes)
+            const grid = this.getGrid()
             return (
                 <div>
-                {this.state.maze.nodes.map((node) => {
-                    const nodeString = this.getTile(node.id)
-                    return <img key={node.id} alt={nodeString} src={require(`../tiles/${nodeString}.png`)} width='100' />
-                })}
+                    <table className="table">
+                        <tbody>
+                            {grid.map((row, index) => {
+                                return (
+                                    <tr key={index} >
+                                        {row.map((node) => {
+                                            const nodeString = this.getTile(node.id)
+                                            return (
+                                                <td>
+                                                    <img key={node.id} alt={nodeString} src={require(`../tiles/${nodeString}.png`)} width='100' />
+                                                </td>
+                                            )
+                                        })}    
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
                 </div>
             )
         } else {

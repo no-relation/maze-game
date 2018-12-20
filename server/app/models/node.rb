@@ -9,16 +9,7 @@ class Node < ApplicationRecord
     belongs_to :southNeighbor, foreign_key: :south_neighbor, class_name: 'Node', optional: true
     belongs_to :westNeighbor, foreign_key: :west_neighbor, class_name: 'Node', optional: true
     
-    attr_accessor :row, :col, :visited, :neighbors, :on_path
-
-    def initialize(row:, col: )
-        @row = row
-        @col = col
-        @visited = false
-        @on_path = false
-        # @neighbors = {north: nil, east: nil, south: nil, west: nil}
-        super( { row: row, col: col})
-    end
+    attr_accessor :visited, :neighbors, :on_path
 
     # Connect this node to another node. The other node can only fit
     # in one of four cardinal directions from this node: North, South,
