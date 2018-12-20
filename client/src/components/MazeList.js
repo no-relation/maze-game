@@ -27,7 +27,7 @@ export class MazeList extends Component {
     render() {
         return (
             <div>
-                <h1>Maze List Goes here</h1>
+                <h1>Choose a Maze</h1>
                 <ul className="list-group">
                     {this.state.allMazes.map((maze) => {
                         return <li key={maze.id} className='list-group-item'>

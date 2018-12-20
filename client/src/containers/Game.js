@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+// import { Link } from 'react-router-dom'
+import { MazeList } from '../components/MazeList';
+// import { MazeList } from "../components/MazeList";
+// import { PlayerEdit } from "../components/PlayerEdit";
+// import { Player } from "../components/Player";
 
 export class Game extends Component {
 
@@ -29,8 +34,7 @@ export class Game extends Component {
                 <button className='btn btn-success' onClick={()=> this.startTime() }>Start</button>
                 <button className='btn btn-danger' onClick={()=> this.stopTime()} >Stop</button>
                 <span><strong>{this.state.time}</strong></span>
-
-                {/* <MazeList /> */}
+                <MazeList />
             </div>
         )
     }
