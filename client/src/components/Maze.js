@@ -39,7 +39,7 @@ export class Maze extends Component {
                                         } else if (nodeID==='start') {
                                             return (
                                             <div className='col' key={nodeID} styles='max-width: 100px'>
-                                                <img alt={'start'} src={require(`../tiles/start.png`)} />
+                                                <img alt={'start'} src={require(`../tiles/start.png`)} onClick={this.beginning} />
                                             </div>
                                             )
 
@@ -163,15 +163,12 @@ export class Maze extends Component {
         return Math.floor(Math.random()*1000)+1
     }
 
+    beginning() {
+        console.log('GO GO GO')
+    }
+
     winning() {
-        return (
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>You found the exit!</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        )
+        console.log('A winner')
     }
 
 }
