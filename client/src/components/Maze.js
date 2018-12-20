@@ -36,35 +36,45 @@ export class Maze extends Component {
             const grid = this.getNeighbors(this.state.playerPosition)
             console.log('grid is',grid)
             return (
-                <div>
-                    <table className="table">
-                        <tbody>
-                            {grid.map((row, index) => {
-                                return (
-                                    <tr key={index} >
-                                        {row.map((nodeID) => {
-                                            if (nodeID === 0) {    
-                                                return (
-                                                    <td>
-                                                        {/* <img alt={nodeString} src={require(`../tiles/blank.png`)} width='100' /> */}
+                <div className='container no-gutters' styles='max-width: 300px' >
+                    {grid.map((row, index) => {
+                        return (
+                            <div className='row align-items-center' key={index} >
+                                    {row.map((nodeID) => {
+                                        if (nodeID === 0) {    
+                                            return (
+                                                <div className='col' key={nodeID} styles='max-width: 100px'>
+                                                    <img alt={'blank'} src={require(`../tiles/blank.png`)} />
 
-                                                    </td>
-                                                )
-                                            } else {
-                                                const node = this.findNodeByID(nodeID)
-                                                const nodeString = this.getTile(node)
-                                                return (
-                                                    <td >
-                                                        <img alt={nodeString} src={require(`../tiles/${nodeString}.png`)} width='100' onClick={() => this.handleClick(node)} key={node.id} />
-                                                    </td>
-                                                )
-                                            }
-                                        })}    
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
+                                                </div>
+                                            )
+                                        } else if (nodeID==='start') {
+                                            return (
+                                            <div className='col' key={nodeID} styles='max-width: 100px'>
+                                                <img alt={'start'} src={require(`../tiles/start.png`)} />
+                                            </div>
+                                            )
+
+                                        } else if (nodeID==='end') {
+                                            return (
+                                            <div className='col' key={nodeID} styles='max-width: 100px'>
+                                                <img alt={'end'} src={require(`../tiles/end.png`)} />
+                                            </div>
+                                            )
+
+                                        } else {
+                                            const node = this.findNodeByID(nodeID)
+                                            const nodeString = this.getTile(node)
+                                            return (
+                                                <div className='col' key={nodeID} styles='max-width: 100px' >
+                                                    <img alt={nodeString} src={require(`../tiles/${nodeString}.png`)} onClick={() => this.handleClick(node)} key={node.id} />
+                                                </div>
+                                            )
+                                        }
+                                    })}
+                            </div>
+                        )
+                    })}
                 </div>
             )
         } else {
@@ -81,7 +91,6 @@ export class Maze extends Component {
     }
 
     getTile(tileNode) {
-        console.log(tileNode)
         let tileString = ''
 
         if (tileNode.north_neighbor) {
@@ -114,13 +123,17 @@ export class Maze extends Component {
             localGrid.push([0, 0, 0])
         }
         let localRow = []
-        if (positionNode.west_neighbor) {
+        if (positionNode.id === this.state.maze.start_node_id) {
+            localRow.push('start')
+        } else if (positionNode.west_neighbor) {
             localRow.push(positionNode.west_neighbor)
         } else {
             localRow.push(0)
         }
         localRow.push(positionNode.id)
-        if (positionNode.east_neighbor) {
+        if (positionNode.id === this.state.maze.end_node_id) {
+            localRow.push('end')
+        } else if (positionNode.east_neighbor) {
             localRow.push(positionNode.east_neighbor)
         } else {
             localRow.push(0)
