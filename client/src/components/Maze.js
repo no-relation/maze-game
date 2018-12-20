@@ -7,7 +7,7 @@ export class Maze extends Component {
         maze: null
     }
 
-    mazeID() {
+    mazeID = () => {
         return this.props.match.params.id
     }
 
@@ -33,39 +33,29 @@ export class Maze extends Component {
         if (tileNode.west_neighbor) {
             tileString += 'W'
         }
-        return `../tiles/${tileString}.jpg`
+        return require(`../tiles/${tileString}.jpg`)
     }
 
-    findNumOfColumns() {
-        const endNodeIndex = this.state.maze.nodes.findIndex((node) => node.id === this.state.maze.end_node_id)
-
-        console.log('end node index',endNodeIndex)
-
-        // going to have to lock the maze width at 5, 13, 19, 29
-        const widths = [5, 13, 19, 29]
-        let index = 0
-
-        widths.forEach((width) => {
-            if ((endNodeIndex+1) % width === 0){
-                index = width
-            }
-        })
-        return index
-    }
 
     render() {
+        // console.log(this.state.maze)
+        // return 'TESTING'
         if (this.state.maze) {
-            console.log('Size:', this.state.maze.nodes.length)
-            console.log('column number:', this.findNumOfColumns())
-
-        }
-        return (
-            <div>
+            console.log('Size:', this.state.maze.nodes)
+            return (
+                <div>
                 {/* why is it trying to render before this.state.maze is found? */}
-            {/* {this.state.maze.nodes.map((node) => {
-                return <img key={node.id} src={this.getTile(node.id)} />
-            })} */}
-            </div>
-        )
+                {this.state.maze.nodes.map((node) => {
+                    return <img key={node.id} src={this.getTile(node.id)} />
+                })}
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <h3>Loading...</h3>
+                </div>
+            )
+        }
     }
 }

@@ -31,6 +31,8 @@ class Maze < ApplicationRecord
       @end_node = @maze[rand(@rows)][@cols - 1]
       super( { nodes: nodes })
       self.generate
+      self.rows = @rows
+      self.columns = @cols
       self.start_node = @start_node
       self.end_node = @end_node
       self.high_score = 0
