@@ -10,7 +10,7 @@ class Api::V1::MazesController < Api::V1::ApplicationController
     end
     
     def index
-        render json: Maze.all
+        render json: Maze.all, methods: [ :nodes, :start_node, :end_node ]
     end
     
     def show

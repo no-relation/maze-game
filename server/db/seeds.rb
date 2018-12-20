@@ -9,6 +9,7 @@
 Player.destroy_all
 Maze.destroy_all
 Attempt.destroy_all
+Node.destroy_all
 
 player1 = Player.create(username: "alan", email: "alan@example.com", password: "0000")
 player2 = Player.create(username: "bilikiss", email: "bilikiss@example.com", password: "1234")
@@ -23,5 +24,6 @@ player10 = Player.create(username: "jordan", email: "jordan@example.com", passwo
 player11 = Player.create(username: "joseph", email: "joseph@example.com", password: "9800")
 
 maze3x3 = Maze.create({rows: 3, columns: 3})
+maze4x4 = Maze.create({rows: 4, columns: 4})
 maze5x5 = Maze.create({rows: 5, columns: 5})
 maze10x10 = Maze.create({rows: 10, columns: 10})
