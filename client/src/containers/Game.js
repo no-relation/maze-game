@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Maze } from "../components/Maze";
-import { MazeList } from "../components/MazeList";
+// import { MazeList } from "../components/MazeList";
 // import { PlayerEdit } from "../components/PlayerEdit";
 // import { Player } from "../components/Player";
 
@@ -32,9 +31,9 @@ export class Game extends Component {
             <div>
                 <button className='btn btn-success' onClick={()=> this.startTime() }>Start</button>
                 <button className='btn btn-danger' onClick={()=> this.stopTime()} >Stop</button>
-                <span>{this.state.time}</span>
+                <span><strong>{this.state.time}</strong></span>
 
-                <MazeList />
+                {/* <MazeList /> */}
             </div>
         )
     }
