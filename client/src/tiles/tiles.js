@@ -1,19 +1,19 @@
 const tiles = [
-    'E.jpg',
-    'ES.jpg',
-    'ESW.jpg',
-    'EW.jpg',
-    'N.jpg',
-    'NE.jpg',
-    'NES.jpg',
-    'NESW.jpg',
-    'NEW.jpg',
-    'NS.jpg',
-    'NSW.jpg',
-    'NW.jpg',
-    'S.jpg',
-    'SW.jpg',
-    'W.jpg'
+    'E.png',
+    'ES.png',
+    'ESW.png',
+    'EW.png',
+    'N.png',
+    'NE.png',
+    'NES.png',
+    'NESW.png',
+    'NEW.png',
+    'NS.png',
+    'NSW.png',
+    'NW.png',
+    'S.png',
+    'SW.png',
+    'W.png'
 ]
 
 module.exports = {

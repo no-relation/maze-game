@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { tiles } from '../tiles/tiles'
 
 export class Maze extends Component {
 
@@ -27,26 +26,30 @@ export class Maze extends Component {
         if (tileNode.east_neighbor) {
             tileString += 'E'
         }
+        if (tileNode.id === this.state.maze.end_node_id) {
+            tileString += 'E'
+        }
         if (tileNode.south_neighbor) {
             tileString += 'S'
         }
         if (tileNode.west_neighbor) {
             tileString += 'W'
         }
-        return require(`../tiles/${tileString}.jpg`)
+        if (tileNode.id === this.state.maze.start_node_id) {
+            tileString += 'W'
+        }
+        return tileString
     }
 
 
     render() {
-        // console.log(this.state.maze)
-        // return 'TESTING'
         if (this.state.maze) {
-            console.log('Size:', this.state.maze.nodes)
+            console.log(this.state.maze.nodes)
             return (
                 <div>
-                {/* why is it trying to render before this.state.maze is found? */}
                 {this.state.maze.nodes.map((node) => {
-                    return <img key={node.id} src={this.getTile(node.id)} />
+                    const nodeString = this.getTile(node.id)
+                    return <img key={node.id} alt={nodeString} src={require(`../tiles/${nodeString}.png`)} width='100' />
                 })}
                 </div>
             )
