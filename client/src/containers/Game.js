@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-// import { MazeList } from "../components/MazeList";
-// import { PlayerEdit } from "../components/PlayerEdit";
-// import { Player } from "../components/Player";
 
 export class Game extends Component {
 
@@ -38,3 +35,4 @@ export class Game extends Component {
         )
     }
 }
+
