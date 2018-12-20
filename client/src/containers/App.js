@@ -13,12 +13,11 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <div className='container'>
-            <Game />
             <Switch>
               {/* <Route path='/login' component={Login} /> */}
               <Route path='/game' component={Game} />
                 <Route path='/mazes/:id' component = {Maze}/> */}
-                <Route path='/mazes' component= {MazeList} /> 
+                <Route path='/mazes' component = {MazeList} /> 
               {/* <Route path='/players/:id/edit' component={PlayerEdit} />
               <Route path='/players/:id' component={Player} /> */}
             </Switch>
