@@ -1,7 +1,7 @@
 class Api::V1::PlayersController < Api::V1::ApplicationController
     before_action :define_current_player
 
-    # skip_before_action :check_authentication, only: [ :index ]
+    skip_before_action :check_authentication, only: [ :index ]
     
     def create
         player = Player.create(player_params)
