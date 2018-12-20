@@ -4,7 +4,8 @@ export class Maze extends Component {
 
     state = {
         maze: null, 
-        playerPosition: null
+        playerPosition: null,
+        steps: 0
     }
 
     mazeID = () => {
@@ -17,25 +18,12 @@ export class Maze extends Component {
             .then(maze => this.setState({ maze, playerPosition: maze.start_node }))
     }
 
-    // render() {
-    //     if (this.state.maze) {
-    //         let nodeString = this.getTile(this.state.playerPosition.id)
-    //         return(
-    //             <img alt={nodeString} src={require(`../tiles/${nodeString}.png`)} width='100' />
-    //         )
-    //     } else {
-    //         return (
-    //             <div>
-    //                 <h3>Loading...</h3>
-    //             </div>
-    //         )
-    //     }
-    // }
     render() {
         if (this.state.maze) {
             const grid = this.getNeighbors(this.state.playerPosition)
-            console.log('grid is',grid)
             return (
+                <div>
+                <h1>{`Steps: ${this.state.steps}`} </h1>
                 <div className='container no-gutters' styles='max-width: 300px' >
                     {grid.map((row, index) => {
                         return (
@@ -43,7 +31,7 @@ export class Maze extends Component {
                                     {row.map((nodeID) => {
                                         if (nodeID === 0) {    
                                             return (
-                                                <div className='col' key={nodeID} styles='max-width: 100px'>
+                                                <div className='col' key={this.randomKey()} styles='max-width: 100px'>
                                                     <img alt={'blank'} src={require(`../tiles/blank.png`)} />
 
                                                 </div>
@@ -58,7 +46,7 @@ export class Maze extends Component {
                                         } else if (nodeID==='end') {
                                             return (
                                             <div className='col' key={nodeID} styles='max-width: 100px'>
-                                                <img alt={'end'} src={require(`../tiles/end.png`)} />
+                                                <img alt={'end'} src={require(`../tiles/end.png`)} onClick={this.winning} />
                                             </div>
                                             )
 
@@ -76,6 +64,7 @@ export class Maze extends Component {
                         )
                     })}
                 </div>
+                </div>
             )
         } else {
             return (
@@ -87,7 +76,10 @@ export class Maze extends Component {
     }
 
     handleClick(node) {
-        this.setState({ playerPosition: node })
+        this.setState({ 
+            playerPosition: node,
+            steps: this.state.steps + 1 
+        })
     }
 
     getTile(tileNode) {
@@ -165,6 +157,21 @@ export class Maze extends Component {
 
     findNodeByID(nodeID) {
         return this.state.maze.nodes.find((node) => node.id === nodeID)
+    }
+
+    randomKey() {
+        return Math.floor(Math.random()*1000)+1
+    }
+
+    winning() {
+        return (
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>You found the exit!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        )
     }
 
 }
