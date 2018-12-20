@@ -11,10 +11,17 @@ Maze.destroy_all
 Attempt.destroy_all
 Node.destroy_all
 
-player1 = Player.create(username: "alan", email: "alan@example.com")
-player2 = Player.create(username: "bilikis", email: "bilikis@example.com")
-player3 = Player.create(username: "eddie", email: "eddie@example.com")
-player4 = Player.create(username: "john", email: "john@example.com")
+player1 = Player.create(username: "alan", email: "alan@example.com", password: "0000")
+player2 = Player.create(username: "bilikiss", email: "bilikiss@example.com", password: "1234")
+player3 = Player.create(username: "eddie", email: "eddie@example.com", password: "5678")
+player4 = Player.create(username: "john", email: "john@example.com", password: "9100")
+player5 = Player.create(username: "janu", email: "janu@example.com", password: "9200")
+player6 = Player.create(username: "megan", email: "megan@example.com", password: "9300")
+player7 = Player.create(username: "brabra", email: "brabra@example.com", password: "9400")
+player8 = Player.create(username: "alex", email: "alex@example.com", password: "9500")
+player9 = Player.create(username: "robert", email: "robert@example.com", password: "9600")
+player10 = Player.create(username: "jordan", email: "jordan@example.com", password: "9700")
+player11 = Player.create(username: "joseph", email: "joseph@example.com", password: "9800")
 
 maze3x3 = Maze.create({rows: 3, columns: 3})
 maze4x4 = Maze.create({rows: 4, columns: 4})

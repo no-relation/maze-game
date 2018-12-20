@@ -1,6 +1,10 @@
 # maze-game
 Mod 4 project: a maze game in React
 
+to be cleaned up:
+ * don't need row and col attributes in Maze class
+ * unused routes
+ 
 A new maze is generated with forked ruby code and stored in backend
 
 Tiles know where in the maze they are, what exits they have, and if they are the exit. Users can see a 3x3 set of tiles at any given time.
