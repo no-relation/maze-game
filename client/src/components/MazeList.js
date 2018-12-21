@@ -50,9 +50,6 @@ export class MazeList extends Component {
                 side = 10
         }
 
-        let array = [1, 2, 3]
-        let something = array.concat([ 4 ])
-
         fetch(URL ,{
             method: 'POST',
             headers: {
