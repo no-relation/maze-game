@@ -72,6 +72,7 @@ export class MazeList extends Component {
                             <Link to={`/mazes/${maze.id}`}>
                                 {`Maze #${maze.id}`}
                                 <span className='badge'>{`${maze.nodes.length} Tiles`}</span>
+                                <p>{`Best Score: ${maze.high_score}`}</p>
                             </Link>
                         </ListGroupItem>
                     })}
