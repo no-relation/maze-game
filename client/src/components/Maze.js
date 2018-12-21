@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
+// import { Modal } from 'react-bootstrap'
 
 export class Maze extends Component {
 
     state = {
         maze: null, 
         playerPosition: null,
-        steps: 0
+        steps: 0,
+        // showWin: false
     }
+
+    // handleClose() {
+    //     this.setState({ showWin: false })
+    // }
+
+    // handleShow() {
+    //     this.setState({ showWin: true })
+    // }
 
     mazeID = () => {
         return this.props.match.params.id
@@ -22,9 +32,23 @@ export class Maze extends Component {
         if (this.state.maze) {
             const grid = this.getNeighbors(this.state.playerPosition)
             return (
-                <div>
+            <div>
+                {/* <div>
+                    <Modal show={this.state.show} onHide={this.handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>You found the exit!</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <h4>Did you get the high score?</h4>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <button className='btn' onClick={this.handleClose}>Close</button>
+                        </Modal.Footer>
+                    </Modal>
+                </div> */}
+                            
                 <h1>{`Steps: ${this.state.steps}`} </h1>
-                <div className='container no-gutters' styles='max-width: 300px' >
+                <div className='container no-gutter' styles='max-width: 300px' >
                     {grid.map((row, index) => {
                         return (
                             <div className='row align-items-center' key={index} >
@@ -46,7 +70,7 @@ export class Maze extends Component {
                                         } else if (nodeID==='end') {
                                             return (
                                             <div className='col' key={nodeID} styles='max-width: 100px'>
-                                                <img alt={'end'} src={require(`../tiles/end.png`)} onClick={this.winning} />
+                                                <img alt={'end'} src={require(`../tiles/end.png`)} width='165px' onClick={this.winning} data-toggle="modal" data-target="winFlag" />
                                             </div>
                                             )
 
@@ -64,7 +88,7 @@ export class Maze extends Component {
                         )
                     })}
                 </div>
-                </div>
+            </div>
             )
         } else {
             return (
@@ -169,6 +193,8 @@ export class Maze extends Component {
 
     winning() {
         console.log('A winner')
+        // why is 'this' undefined for calling up modal?
+        // this.handleShow()
     }
 
 }
