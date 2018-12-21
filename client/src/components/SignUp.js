@@ -15,11 +15,27 @@ export class SignUp extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    fetch("http://localhost:3000/api/v1/players/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        player: {
+          username: e.target.username.value,
+          email: e.target.email.value,
+          password: e.target.password.value
+        }
+      })
+    })
+      .then(resp => resp.json())
+      .then(result => {
+        console.log(result);
+        localStorage.setItem("token", result.token);
+      });
+    // .then(() => this.props.history.push(`/mazes/`));
     this.setState(this.getInitialState());
-  };
-
-  goTo = url => {
-    this.props.history.push(url);
   };
 
   render() {
@@ -65,7 +81,7 @@ export class SignUp extends Component {
             onChange={e => this.handleChange(e)}
           />
         </div>
-        <button onClick={() => this.goTo(`/Login`)}>SignUp</button>
+        <button>SignUp</button>
       </form>
     );
   }
