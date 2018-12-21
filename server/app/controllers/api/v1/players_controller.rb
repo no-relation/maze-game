@@ -1,7 +1,7 @@
 class Api::V1::PlayersController < Api::V1::ApplicationController
     before_action :define_current_player
 
-    skip_before_action :check_authentication, only: [ :index ]
+    skip_before_action :check_authentication, only: [ :index, :create]
     
     def create
         player = Player.create(player_params)
@@ -27,7 +27,7 @@ class Api::V1::PlayersController < Api::V1::ApplicationController
     end
     
     def player_params
-        params.permit(:username, :email, :password)
+        params.require(:player).permit(:username, :email, :password)
     end
     
     def define_current_player

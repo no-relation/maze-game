@@ -5,7 +5,8 @@ class Api::V1::AuthController < Api::V1::ApplicationController
         player = Player.find_by(email: params[:email])
         if player && player.authenticate(params[:password])
             render json: {
-                token: JWT.encode({ player_id: player.id }, 'my_apps_secret')
+                token: JWT.encode({ player_id: player.id }, 'my_apps_secret'),
+                player: player
             }
         else
             render json: {

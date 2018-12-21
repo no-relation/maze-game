@@ -40,7 +40,7 @@ export class PlayerEdit extends Component {
     const { username, email, password } = this.state.player;
     return (
       <form onSubmit={this.savePlayer}>
-        <h1>Edit Player</h1>
+        <h3>Edit Player</h3>
         <div className="form-group">
           <label>Username</label>
           <input
