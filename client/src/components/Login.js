@@ -32,10 +32,16 @@ export class Login extends Component {
             type="password"
           />
         </div>
-        <button className="btn btn-primary">Login</button>
+        <button onClick={() => this.goTo(`/mazes`)} className="btn btn-primary">
+          Login
+        </button>
       </form>
     );
   }
+
+  goTo = url => {
+    this.props.history.push(url);
+  };
 
   login = e => {
     e.preventDefault();
