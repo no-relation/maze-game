@@ -28,7 +28,7 @@ export class PlayerList extends Component {
         </thead>
         <tbody>
           {players.map(player => (
-            <tr>
+            <tr key={player.id} >
               <td>
                 <Link to={`/players/${player.id}`}>{player.username}</Link>
               </td>

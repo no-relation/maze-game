@@ -30,3 +30,13 @@
     transform: rotate(360deg);
   }
 }
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+
+.rowC {
+  display:flex; 
+  flex-direction:row;
+}
