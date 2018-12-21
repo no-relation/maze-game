@@ -63,7 +63,7 @@ export class MazeList extends Component {
             .then(resp => resp.json())
             // seems to be taking time, so I'd like a "Loading" message of some kind here
             // why does this not add the newMaze to allMazes? Is the response not a maze instance?
-            .then(newMaze => () => this.setState({ allMazes: this.state.allMazes.concat(newMaze) }))
+            .then(receivedMaze => () => this.setState({ allMazes: this.state.allMazes.concat(receivedMaze) }))
     }
 
     deleteMaze(maze) {
