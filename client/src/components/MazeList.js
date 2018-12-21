@@ -27,7 +27,7 @@ export class MazeList extends Component {
     }
 
     newMaze(size) {
-        this.setState=({ isOpen: false })
+        this.setState({ isOpen: false, isLoading: true })
         let side;
         // small = 7-12 tiles on a side
         // medium = 13-18 tiles on a side
@@ -49,6 +49,10 @@ export class MazeList extends Component {
             default:
                 side = 10
         }
+
+        let array = [1, 2, 3]
+        let something = array.concat([ 4 ])
+
         fetch(URL ,{
             method: 'POST',
             headers: {
@@ -63,7 +67,10 @@ export class MazeList extends Component {
             .then(resp => resp.json())
             // seems to be taking time, so I'd like a "Loading" message of some kind here
             // why does this not add the newMaze to allMazes? Is the response not a maze instance?
-            .then(receivedMaze => () => this.setState({ allMazes: this.state.allMazes.concat(receivedMaze) }))
+            .then(receivedMaze => {
+                console.log('THIS THING >>', receivedMaze)
+                this.setState({ allMazes: [ ...this.state.allMazes, receivedMaze], isLoading: false })
+            })
     }
 
     deleteMaze(maze) {
@@ -81,6 +88,7 @@ export class MazeList extends Component {
                 <h3>Choose a Maze</h3>
                 <ListGroup>
                     {this.state.allMazes.map((maze) => {
+                        console.log(maze)
                         return <ListGroupItem key={maze.id}>
                             <Link to={`/mazes/${maze.id}`}>
                                 {`Maze #${maze.id} `}

@@ -6,7 +6,7 @@ class Api::V1::MazesController < Api::V1::ApplicationController
     
     def create
         maze = Maze.create(maze_params)
-        render json: maze
+        render json: maze, methods: [ :nodes, :start_node, :end_node ]
     end
     
     def index

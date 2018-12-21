@@ -18,15 +18,15 @@ class App extends Component {
           <div className="container">
             {/* <Game /> */}
             <Switch>
-              <Route path="/login" component={Login} />
-              <Route path="/game" component={Game} />
-              <Route path="/players/:id/edit" component={PlayerEdit} />
-              <Route path="/players/:id" component={PlayerDetail} />
-              <Route path="/players/" component={PlayerList} />
-              <Route path="/signup" component={SignUp} />
+              <Route path="/login" component = {Login} />
+              <Route path="/game" component = {Game} />
+              <Route path="/players/:id/edit" component = {PlayerEdit} />
+              <Route path="/players/:id" component = {PlayerDetail} />
+              <Route path="/players/" component = {PlayerList} />
+              <Route path="/signup" component = {SignUp} />
               <Route path='/mazes/:id' component = {Maze} /> 
-              <Route path='/mazes' component= {MazeList} /> 
-              <Route path="/" component={Login} />
+              <Route path='/mazes' component = {MazeList} /> 
+              <Route path="/" component = {Login} />
             </Switch>
           </div>
         </BrowserRouter>
