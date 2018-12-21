@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export class Login extends Component {
   render() {
     return (
-      <form onSubmit={this.login}>
+      <form onSubmit={e => this.login(e)}>
         <h3>Login</h3>
         <div className="form-group">
           <label className="control-label">Username</label>
@@ -32,9 +32,7 @@ export class Login extends Component {
             type="password"
           />
         </div>
-        <button onClick={() => this.goTo(`/mazes`)} className="btn btn-primary">
-          Login
-        </button>
+        <button className="btn btn-primary">Login</button>
       </form>
     );
   }
@@ -45,6 +43,8 @@ export class Login extends Component {
 
   login = e => {
     e.preventDefault();
+    console.log(e.target.passwordInput.value);
+
     fetch("http://localhost:3000/api/v1/auth/", {
       method: "POST",
       headers: {
@@ -59,6 +59,7 @@ export class Login extends Component {
       .then(result => {
         console.log(result);
         localStorage.setItem("token", result.token);
+        this.goTo(`/mazes`);
       });
   };
 }

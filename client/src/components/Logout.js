@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 
 export class Logout extends Component {
+  logoutPlayer = () => {
+    localStorage.clear();
+  };
+
   render() {
-    return <h1>Logout</h1>;
+    return (
+      <div>
+        <button onClick={this.logoutPlayer}>Logout</button>
+      </div>
+    );
   }
 }
