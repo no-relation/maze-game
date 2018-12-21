@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import { Game } from "./Game";
+import { Game } from "./Game";
 import { Login } from "../components/Login";
 import { PlayerList } from "../components/PlayerList";
 import { PlayerEdit } from "../components/PlayerEdit";
@@ -19,6 +19,7 @@ class App extends Component {
             {/* <Game /> */}
             <Switch>
               <Route path="/login" component={Login} />
+              <Route path="/game" component={Game} />
               <Route path="/players/:id/edit" component={PlayerEdit} />
               <Route path="/players/:id" component={PlayerDetail} />
               <Route path="/players/" component={PlayerList} />
