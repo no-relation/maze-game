@@ -34,8 +34,11 @@ export class SignUp extends Component {
         console.log(result);
         localStorage.setItem("token", result.token);
       });
-    // .then(() => this.props.history.push(`/mazes/`));
     this.setState(this.getInitialState());
+  };
+
+  goTo = url => {
+    this.props.history.push(url);
   };
 
   render() {
@@ -81,7 +84,7 @@ export class SignUp extends Component {
             onChange={e => this.handleChange(e)}
           />
         </div>
-        <button>SignUp</button>
+        <button onClick={() => this.goTo(`/mazes`)}>SignUp</button>
       </form>
     );
   }

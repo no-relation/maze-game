@@ -6,9 +6,10 @@ import { Login } from "../components/Login";
 import { PlayerList } from "../components/PlayerList";
 import { PlayerEdit } from "../components/PlayerEdit";
 import { PlayerDetail } from "../components/PlayerDetail";
-import { MazeList } from "../components/MazeList";  
+import { MazeList } from "../components/MazeList";
 import { Maze } from "../components/Maze";
 import { SignUp } from "../components/SignUp";
+import { Logout } from "../components/Logout";
 
 class App extends Component {
   render() {
@@ -18,15 +19,16 @@ class App extends Component {
           <div className="container">
             {/* <Game /> */}
             <Switch>
-              <Route path="/login" component = {Login} />
-              <Route path="/game" component = {Game} />
-              <Route path="/players/:id/edit" component = {PlayerEdit} />
-              <Route path="/players/:id" component = {PlayerDetail} />
-              <Route path="/players/" component = {PlayerList} />
-              <Route path="/signup" component = {SignUp} />
-              <Route path='/mazes/:id' component = {Maze} /> 
-              <Route path='/mazes' component = {MazeList} /> 
-              <Route path="/" component = {Login} />
+              <Route path="/login" component={Login} />
+              <Route path="/game" component={Game} />
+              <Route path="/players/:id/edit" component={PlayerEdit} />
+              <Route path="/players/:id" component={PlayerDetail} />
+              <Route path="/players/" component={PlayerList} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/logout" component={Logout} />
+              <Route path="/mazes/:id" component={Maze} />
+              <Route path="/mazes" component={MazeList} />
+              <Route path="/" component={Login} />
             </Switch>
           </div>
         </BrowserRouter>

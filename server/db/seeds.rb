@@ -12,7 +12,7 @@ Attempt.destroy_all
 Node.destroy_all
 
 player1 = Player.create(username: "alan", email: "alan@example.com", password: "0000")
-player2 = Player.create(username: "bilikiss", email: "bilikiss@example.com", password: "0000")
+player2 = Player.create(username: "bilikiss", email: "b@example.com", password: "0000")
 player3 = Player.create(username: "eddie", email: "eddie@example.com", password: "0000")
 player4 = Player.create(username: "john", email: "john@example.com", password: "0000")
 player5 = Player.create(username: "janu", email: "janu@example.com", password: "0000")
