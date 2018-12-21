@@ -1,6 +1,16 @@
 # maze-game
 Mod 4 project: a maze game in React
 
+TODO 12/21:
+Eddie:
+  * navbar
+  * creating Attempts to connect Players and Mazes
+  * conditional render / loading spinner for new maze method
+
+Bilikis:
+  * logout method
+  * login redirect
+
 to be cleaned up:
  * don't need row and col attributes in Maze class
  * unused routes
