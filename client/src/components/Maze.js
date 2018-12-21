@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import { Modal } from 'react-bootstrap'
+const URL = 'http://localhost:3000/api/v1/mazes/'
 
 export class Maze extends Component {
 
@@ -23,7 +24,7 @@ export class Maze extends Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:3000/api/v1/mazes/${this.mazeID()}`)
+        fetch(URL + this.mazeID())
             .then(resp => resp.json())
             .then(maze => this.setState({ maze, playerPosition: maze.start_node }))
     }
@@ -191,8 +192,18 @@ export class Maze extends Component {
         console.log('GO GO GO')
     }
 
-    winning() {
-        console.log('A winner')
+    winning = () => {
+        if (this.state.maze.high_score === 0 || this.state.steps < this.state.maze.high_score) {
+            fetch(URL + this.mazeID(), {
+                method: 'PATCH',
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify({ high_score: this.state.steps})
+            })
+
+        }
         // why is 'this' undefined for calling up modal?
         // this.handleShow()
     }
