@@ -4,7 +4,7 @@ export class Login extends Component {
   render() {
     return (
       <form onSubmit={this.login}>
-        <h1>Login</h1>
+        <h3>Login</h3>
         <div className="form-group">
           <label className="control-label">Username</label>
           <input
@@ -20,7 +20,7 @@ export class Login extends Component {
             name="emailInput"
             placeholder="Enter email"
             className="form-control"
-            type="text"
+            type="email"
           />
         </div>
         <div className="form-group">
@@ -29,7 +29,7 @@ export class Login extends Component {
             name="passwordInput"
             placeholder="Enter password"
             className="form-control"
-            type="text"
+            type="password"
           />
         </div>
         <button className="btn btn-primary">Login</button>
@@ -51,6 +51,7 @@ export class Login extends Component {
     })
       .then(res => res.json())
       .then(result => {
+        console.log(result);
         localStorage.setItem("token", result.token);
       });
   };

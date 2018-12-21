@@ -8,7 +8,7 @@ import { PlayerEdit } from "../components/PlayerEdit";
 import { PlayerDetail } from "../components/PlayerDetail";
 import { MazeList } from "../components/MazeList";  
 import { Maze } from "../components/Maze";
-
+import { SignUp } from "../components/SignUp";
 
 class App extends Component {
   render() {
@@ -23,6 +23,7 @@ class App extends Component {
               <Route path="/players/:id/edit" component={PlayerEdit} />
               <Route path="/players/:id" component={PlayerDetail} />
               <Route path="/players/" component={PlayerList} />
+              <Route path="/signup" component={SignUp} />
               <Route path='/mazes/:id' component = {Maze} /> 
               <Route path='/mazes' component= {MazeList} /> 
               <Route path="/" component={Login} />
