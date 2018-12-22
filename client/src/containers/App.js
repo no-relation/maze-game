@@ -10,6 +10,7 @@ import { MazeList } from "../components/MazeList";
 import { Maze } from "../components/Maze";
 import { SignUp } from "../components/SignUp";
 import { Logout } from "../components/Logout";
+import { NavigationBar } from "../components/NavigationBar"
 
 class App extends Component {
   render() {
@@ -17,7 +18,7 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <div className="container">
-            {/* <Game /> */}
+            <NavigationBar />
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/game" component={Game} />
