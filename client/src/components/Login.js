@@ -55,9 +55,8 @@ export class Login extends Component {
     })
       .then(res => res.json())
       .then(result => {
-        console.log(result);
         localStorage.setItem("token", result.token);
-        localStorage.setItem("player", result.player);
+        localStorage.setItem("playerID", result.player.id);
         this.goTo(`/mazes`);
       });
   };
