@@ -43,8 +43,6 @@ export class Login extends Component {
 
   login = e => {
     e.preventDefault();
-    console.log(e.target.passwordInput.value);
-
     fetch("http://localhost:3000/api/v1/auth/", {
       method: "POST",
       headers: {

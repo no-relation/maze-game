@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Modal } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 const URL = 'http://localhost:3000/api/v1/mazes/'
 
 export class Maze extends Component {
@@ -8,16 +8,16 @@ export class Maze extends Component {
         maze: null, 
         playerPosition: null,
         steps: 0,
-        // showWin: false
+        showWin: false
     }
 
-    // handleClose() {
-    //     this.setState({ showWin: false })
-    // }
+    handleClose() {
+        this.setState({ showWin: false })
+    }
 
-    // handleShow() {
-    //     this.setState({ showWin: true })
-    // }
+    handleShow() {
+        this.setState({ showWin: true })
+    }
 
     mazeID = () => {
         return this.props.match.params.id
@@ -34,8 +34,8 @@ export class Maze extends Component {
             const grid = this.getNeighbors(this.state.playerPosition)
             return (
             <div>
-                {/* <div>
-                    <Modal show={this.state.show} onHide={this.handleClose}>
+                <div>
+                    <Modal show={this.state.showWin} onHide={this.handleClose}>
                         <Modal.Header closeButton>
                             <Modal.Title>You found the exit!</Modal.Title>
                         </Modal.Header>
@@ -46,7 +46,7 @@ export class Maze extends Component {
                             <button className='btn' onClick={this.handleClose}>Close</button>
                         </Modal.Footer>
                     </Modal>
-                </div> */}
+                </div>
                             
                 <h1>{`Steps: ${this.state.steps}`} </h1>
                 <div className='container no-gutter' styles='max-width: 300px' >
@@ -164,21 +164,21 @@ export class Maze extends Component {
         return localGrid
     }
 
-    getGrid() {
-        let gridArray = []
-        for (let i = 0; i < this.state.maze.rows; i++) {
-            let rowArray = []
-            for (let j = 0; j < this.state.maze.columns; j++) {
-                this.state.maze.nodes.forEach(node => {
-                    if (node.row === i && node.col === j) {
-                        rowArray.push(node)
-                    }
-                });
-            }
-            gridArray.push(rowArray)
-        }
-        return gridArray
-    }
+    // getGrid() {
+    //     let gridArray = []
+    //     for (let i = 0; i < this.state.maze.rows; i++) {
+    //         let rowArray = []
+    //         for (let j = 0; j < this.state.maze.columns; j++) {
+    //             this.state.maze.nodes.forEach(node => {
+    //                 if (node.row === i && node.col === j) {
+    //                     rowArray.push(node)
+    //                 }
+    //             });
+    //         }
+    //         gridArray.push(rowArray)
+    //     }
+    //     return gridArray
+    // }
 
     findNodeByID(nodeID) {
         return this.state.maze.nodes.find((node) => node.id === nodeID)
@@ -205,7 +205,7 @@ export class Maze extends Component {
 
         }
         // why is 'this' undefined for calling up modal?
-        // this.handleShow()
+        this.handleShow()
     }
 
 }
