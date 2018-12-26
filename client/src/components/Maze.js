@@ -11,12 +11,12 @@ export class Maze extends Component {
         showWin: false
     }
 
-    handleClose() {
-        this.setState({ showWin: false })
-    }
-
     handleShow() {
         this.setState({ showWin: true })
+    }
+
+    handleClose() {
+        this.setState({ showWin: false })
     }
 
     mazeID = () => {
@@ -193,6 +193,7 @@ export class Maze extends Component {
     }
 
     winning = () => {
+        
         if (this.state.maze.high_score === 0 || this.state.steps < this.state.maze.high_score) {
             fetch(URL + this.mazeID(), {
                 method: 'PATCH',
