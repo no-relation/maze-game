@@ -1,7 +1,5 @@
 class Api::V1::AttemptsController < Api::V1::ApplicationController
     before_action :define_current_attempt
-
-    skip_before_action :check_authentication, only: [ :index ]
     
     def create
         attempt = Attempt.create(attempt_params)
@@ -27,7 +25,7 @@ class Api::V1::AttemptsController < Api::V1::ApplicationController
     end
     
     def attempt_params
-        params.permit(:player_id, :maze_id)
+        params.permit(:player_id, :maze_id, :score)
     end
     
     def define_current_attempt

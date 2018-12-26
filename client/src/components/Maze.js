@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap'
-const URL = 'http://localhost:3000/api/v1/mazes/'
+const URL = 'http://localhost:3000/api/v1/'
 
 export class Maze extends Component {
 
@@ -11,11 +11,11 @@ export class Maze extends Component {
         showWin: false
     }
 
-    handleShow() {
+    handleShow = () => {
         this.setState({ showWin: true })
     }
 
-    handleClose() {
+    handleClose = () => {
         this.setState({ showWin: false })
     }
 
@@ -24,7 +24,12 @@ export class Maze extends Component {
     }
 
     componentDidMount() {
-        fetch(URL + this.mazeID())
+        fetch(URL + 'mazes/' + this.mazeID(), {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+
+        })
             .then(resp => resp.json())
             .then(maze => this.setState({ maze, playerPosition: maze.start_node }))
     }
@@ -193,13 +198,29 @@ export class Maze extends Component {
     }
 
     winning = () => {
-        
+        fetch(URL + 'attempts', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({
+                player: localStorage.getItem('player').id,
+                maze: this.mazeID(),
+                score: this.state.steps
+            })
+        })
+            .then(resp => resp.text)
+            .then(response => console.log(response))
+
         if (this.state.maze.high_score === 0 || this.state.steps < this.state.maze.high_score) {
-            fetch(URL + this.mazeID(), {
+            fetch(URL + 'mazes/' + this.mazeID(), {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
-                    Accept: "application/json"
+                    Accept: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({ high_score: this.state.steps})
             })

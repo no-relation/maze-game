@@ -19,7 +19,11 @@ export class MazeList extends Component {
     toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
 
     getMazes() {
-        fetch(URL)
+        fetch(URL, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
             .then(resp => resp.json())
             .then(data => this.setState({allMazes: data}))
     }
@@ -55,7 +59,8 @@ export class MazeList extends Component {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                Accept: "application/json"                    
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 rows: side,
@@ -72,7 +77,11 @@ export class MazeList extends Component {
 
     deleteMaze(maze) {
         fetch(URL + maze.id, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+
         })
             .then(() => this.getMazes())
     }

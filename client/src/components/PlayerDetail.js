@@ -53,7 +53,10 @@ export class PlayerDetail extends Component {
 
   destroyPlayer = () => {
     fetch(`http://localhost:3000/api/v1/players/${this.playerID()}`, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
     }).then(() => this.props.history.push(`/players/`));
   };
 }
