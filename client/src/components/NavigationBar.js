@@ -37,6 +37,10 @@ export class NavigationBar extends Component {
                         
                         {/* <Navbar.Collapse> */}
                             <Nav >
+                                <NavItem href="/mazes" >Mazes</NavItem>
+                                <NavItem href="/players" >Players</NavItem>
+                            </Nav>
+                            <Nav >
                                 <NavItem href="/signup">Signup</NavItem>
                                 <NavItem href="/login">Login</NavItem>
                                 <NavItem href="/logout">Logout</NavItem>
