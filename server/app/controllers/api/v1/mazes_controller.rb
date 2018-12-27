@@ -1,8 +1,6 @@
 class Api::V1::MazesController < Api::V1::ApplicationController
 
     before_action :define_current_maze
-
-    skip_before_action :check_authentication
     
     def create
         maze = Maze.create(maze_params)

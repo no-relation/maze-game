@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import { Modal } from 'react-bootstrap'
-const URL = 'http://localhost:3000/api/v1/mazes/'
+import { Modal } from 'react-bootstrap'
+import { Link } from "react-router-dom";
+const URL = 'http://localhost:3000/api/v1/'
 
 export class Maze extends Component {
 
@@ -8,23 +9,29 @@ export class Maze extends Component {
         maze: null, 
         playerPosition: null,
         steps: 0,
-        // showWin: false
+        showWin: false
     }
 
-    // handleClose() {
-    //     this.setState({ showWin: false })
-    // }
+    handleShow = () => {
+        this.setState({ showWin: true })
+    }
 
-    // handleShow() {
-    //     this.setState({ showWin: true })
-    // }
+    handleClose = () => {
+        this.setState({ showWin: false })
+    }
 
     mazeID = () => {
         return this.props.match.params.id
     }
 
     componentDidMount() {
-        fetch(URL + this.mazeID())
+        fetch(URL + 'mazes/' + this.mazeID(), {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            
+            }
+
+        })
             .then(resp => resp.json())
             .then(maze => this.setState({ maze, playerPosition: maze.start_node }))
     }
@@ -34,19 +41,35 @@ export class Maze extends Component {
             const grid = this.getNeighbors(this.state.playerPosition)
             return (
             <div>
-                {/* <div>
-                    <Modal show={this.state.show} onHide={this.handleClose}>
-                        <Modal.Header closeButton>
+                <div>
+                    { this.state.showWin &&
+                    <Modal.Dialog onHide={this.handleClose}>
+                        <Modal.Header>
                             <Modal.Title>You found the exit!</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <h4>Did you get the high score?</h4>
+                            <p>Your score: {this.state.steps} </p>
+                            <p>High score: {this.state.maze.high_score} </p>
+                            <p>Would you like to try again?</p>
+                            {/* { if (this.state.steps !== 0) {
+                                if (this.state.steps < this.state.maze.high_score) {
+                                   return "You got the high score!" 
+                                } else {
+                                   return "You didn't get the high score."
+                            } else {
+                                return "You got the high score!" 
+
+                            }}} */}
                         </Modal.Body>
                         <Modal.Footer>
-                            <button className='btn' onClick={this.handleClose}>Close</button>
+                            <button className='btn btn-success' onClick={this.restartMaze}>Try Again?</button>
+                            <Link to='/mazes'>
+                                <button className='btn btn-warning'>Back to Maze List</button>
+                            </Link>
                         </Modal.Footer>
-                    </Modal>
-                </div> */}
+                    </Modal.Dialog>
+                    }
+                </div>
                             
                 <h1>{`Steps: ${this.state.steps}`} </h1>
                 <div className='container no-gutter' styles='max-width: 300px' >
@@ -164,21 +187,21 @@ export class Maze extends Component {
         return localGrid
     }
 
-    getGrid() {
-        let gridArray = []
-        for (let i = 0; i < this.state.maze.rows; i++) {
-            let rowArray = []
-            for (let j = 0; j < this.state.maze.columns; j++) {
-                this.state.maze.nodes.forEach(node => {
-                    if (node.row === i && node.col === j) {
-                        rowArray.push(node)
-                    }
-                });
-            }
-            gridArray.push(rowArray)
-        }
-        return gridArray
-    }
+    // getGrid() {
+    //     let gridArray = []
+    //     for (let i = 0; i < this.state.maze.rows; i++) {
+    //         let rowArray = []
+    //         for (let j = 0; j < this.state.maze.columns; j++) {
+    //             this.state.maze.nodes.forEach(node => {
+    //                 if (node.row === i && node.col === j) {
+    //                     rowArray.push(node)
+    //                 }
+    //             });
+    //         }
+    //         gridArray.push(rowArray)
+    //     }
+    //     return gridArray
+    // }
 
     findNodeByID(nodeID) {
         return this.state.maze.nodes.find((node) => node.id === nodeID)
@@ -193,19 +216,43 @@ export class Maze extends Component {
     }
 
     winning = () => {
+        fetch(URL + 'attempts', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({
+                player_id: localStorage.getItem('playerID'),
+                maze_id: this.mazeID(),
+                score: this.state.steps
+            })
+        })
+            .then(resp => resp.text())
+            .then(response => console.log(response))
+
         if (this.state.maze.high_score === 0 || this.state.steps < this.state.maze.high_score) {
-            fetch(URL + this.mazeID(), {
+            fetch(URL + 'mazes/' + this.mazeID(), {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
-                    Accept: "application/json"
+                    Accept: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({ high_score: this.state.steps})
             })
 
         }
-        // why is 'this' undefined for calling up modal?
-        // this.handleShow()
+        this.handleShow()
+    }
+
+    restartMaze = () => {
+        this.setState({
+            playerPosition: this.state.maze.start_node,
+            steps: 0,
+            showWin: false
+        })
     }
 
 }

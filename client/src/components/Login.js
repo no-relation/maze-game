@@ -43,8 +43,6 @@ export class Login extends Component {
 
   login = e => {
     e.preventDefault();
-    console.log(e.target.passwordInput.value);
-
     fetch("http://localhost:3000/api/v1/auth/", {
       method: "POST",
       headers: {
@@ -57,9 +55,8 @@ export class Login extends Component {
     })
       .then(res => res.json())
       .then(result => {
-        console.log(result);
         localStorage.setItem("token", result.token);
-        localStorage.setItem("player", result.player);
+        localStorage.setItem("playerID", result.player.id);
         this.goTo(`/mazes`);
       });
   };

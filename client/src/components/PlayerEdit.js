@@ -13,7 +13,8 @@ export class PlayerEdit extends Component {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
       },
       body: JSON.stringify({
         username: usernameInput.value,
@@ -30,7 +31,11 @@ export class PlayerEdit extends Component {
   componentDidMount() {
     let playerID = this.props.match.params.id;
 
-    fetch(`http://localhost:3000/api/v1/players/${playerID}`)
+    fetch(`http://localhost:3000/api/v1/players/${playerID}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    })
       .then(res => res.json())
       .then(player => this.setState({ player }));
   }

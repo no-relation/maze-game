@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaSpinner } from "react-icons/fa";
 
 const URL = "http://localhost:3000/api/v1/mazes/"
 
@@ -11,14 +11,19 @@ export class MazeList extends Component {
         super()
         this.state = {
             allMazes: [],
-            isOpen: false
+            isOpen: false,
+            isLoading: false
         }
     }
 
     toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
 
     getMazes() {
-        fetch(URL)
+        fetch(URL, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
             .then(resp => resp.json())
             .then(data => this.setState({allMazes: data}))
     }
@@ -54,7 +59,8 @@ export class MazeList extends Component {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                Accept: "application/json"                    
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 rows: side,
@@ -65,14 +71,17 @@ export class MazeList extends Component {
             // seems to be taking time, so I'd like a "Loading" message of some kind here
             // why does this not add the newMaze to allMazes? Is the response not a maze instance?
             .then(receivedMaze => {
-                console.log('THIS THING >>', receivedMaze)
                 this.setState({ allMazes: [ ...this.state.allMazes, receivedMaze], isLoading: false })
             })
     }
 
     deleteMaze(maze) {
         fetch(URL + maze.id, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+
         })
             .then(() => this.getMazes())
     }
@@ -80,12 +89,19 @@ export class MazeList extends Component {
 
     render() {
         const dropdownClass = `dropdown-menu ${this.state.isOpen ? 'show' : ''}`
-        return (
-            <div>
-                <h3>Choose a Maze</h3>
-                <ListGroup>
+        if (this.state.isLoading) {
+            return (
+                <div>
+                    <FaSpinner className='fa-spin' />
+                    <h3>Loading...</h3>
+                </div>
+            )
+        } else {
+            return(
+                <div>
+                    <h3>Choose a Maze</h3>
+                    <ListGroup>
                     {this.state.allMazes.map((maze) => {
-                        console.log(maze)
                         return <ListGroupItem key={maze.id}>
                             <Link to={`/mazes/${maze.id}`}>
                                 {`Maze #${maze.id} `}
@@ -94,20 +110,22 @@ export class MazeList extends Component {
                             <span className='badge'>{`${maze.nodes.length} Tiles`} </span>
                             <p>{`Best Score: ${maze.high_score}`}</p>
                         </ListGroupItem>
-                    })}
-                </ListGroup>
-                <div className='dropdown'>
-                    <button className='btn btn-primary dropdown-toggle' type='button' id='new-maze' data-toggle="dropdown" open={this.state.isOpen} onClick={this.toggleOpen}>Get New Maze
-                    </button>
-                    <div className={dropdownClass} aria-labelledby="dropdownMenuButton">
-                        <h6 className="dropdown-header">What size?</h6>
-                        <button className="dropdown-item" onClick={() => this.newMaze('small')} >Small</button>
-                        <button className="dropdown-item" onClick={() => this.newMaze('medium')} >Medium</button>
-                        <button className="dropdown-item" onClick={() => this.newMaze('large')} >Large</button>
-                        <button className="dropdown-item" onClick={() => this.newMaze('huge')} >Huge</button>
+                        })}
+                    </ListGroup>
+            
+                    <div className='dropdown'>
+                        <button className='btn btn-primary dropdown-toggle' type='button' id='new-maze' data-toggle="dropdown" open={this.state.isOpen} onClick={this.toggleOpen}>Get New Maze
+                        </button>
+                        <div className={dropdownClass} aria-labelledby="dropdownMenuButton">
+                            <h6 className="dropdown-header">What size?</h6>
+                            <button className="dropdown-item" onClick={() => this.newMaze('small')} >Small</button>
+                            <button className="dropdown-item" onClick={() => this.newMaze('medium')} >Medium</button>
+                            <button className="dropdown-item" onClick={() => this.newMaze('large')} >Large</button>
+                            <button className="dropdown-item" onClick={() => this.newMaze('huge')} >Huge</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }   
     }
 }
