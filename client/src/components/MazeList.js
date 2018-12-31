@@ -91,7 +91,7 @@ export class MazeList extends Component {
         const dropdownClass = `dropdown-menu ${this.state.isOpen ? 'show' : ''}`
         if (this.state.isLoading) {
             return (
-                <div>
+                <div className='fa-3x'>
                     <FaSpinner className='fa-spin' />
                     <h3>Loading...</h3>
                 </div>
