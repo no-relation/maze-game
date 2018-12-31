@@ -27,39 +27,53 @@ export class NavigationBar extends Component {
       });
   }
 
-  render() {
-    if (this.state.currentPlayer) {
-      return (
-        <div className="App container">
-          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <Navbar fluid collapseOnSelect>
-              <Navbar.Header>
-                <Navbar.Brand>
-                  <Link to="/">Maze Game</Link>
-                </Navbar.Brand>
-                {/* <Navbar.Toggle /> */}
-              </Navbar.Header>
+    playerLoggedIn = () => {
+      if (this.state.currentPlayer.error === "Please log in") {
+        return (  
+          <div>
+            <NavItem href="/signup">Signup</NavItem>
+            <NavItem href="/login">Login</NavItem>
+          </div>  
+        )
+      } else { 
+        return (
+          <div>
+            <NavItem href="/logout">Logout</NavItem>
+            <NavItem href={`/players${this.state.currentPlayer.id}`}>
+                Logged in as {this.state.currentPlayer.username}{" "}
+            </NavItem>
+          </div>
+        )
+      }}
 
-              {/* <Navbar.Collapse> */}
-              <Nav>
-                <NavItem href="/mazes">Mazes</NavItem>
-                <NavItem href="/players">Players</NavItem>
-              </Nav>
-              <Nav>
-                <NavItem href="/signup">Signup</NavItem>
-                <NavItem href="/login">Login</NavItem>
-                <NavItem href="/logout">Logout</NavItem>
-                <NavItem href={`/players${this.state.currentPlayer.id}`}>
-                  Logged in as {this.state.currentPlayer.username}{" "}
-                </NavItem>
-              </Nav>
-              {/* </Navbar.Collapse> */}
-            </Navbar>
-          </nav>
-        </div>
-      );
-    } else {
-      return <h2>Loading...</h2>;
-    }
+    render() {
+      if (this.state.currentPlayer) {
+        return (
+          <div className="App container">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+              <Navbar fluid collapseOnSelect>
+                <Navbar.Header>
+                  <Navbar.Brand>
+                    <Link to="/">Maze Game</Link>
+                  </Navbar.Brand>
+                  {/* <Navbar.Toggle /> */}
+                </Navbar.Header>
+
+                {/* <Navbar.Collapse> */}
+                <Nav>
+                  <NavItem href="/mazes">Mazes</NavItem>
+                  <NavItem href="/players">Players</NavItem>
+                </Nav>
+                <Nav className='navbar-right'>
+                  {this.playerLoggedIn()}
+                </Nav>
+                {/* </Navbar.Collapse> */}
+              </Navbar>
+            </nav>
+          </div>
+        );
+      } else {
+        return <h2>Loading...</h2>;
+      }
   }
 }
