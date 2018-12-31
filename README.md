@@ -4,16 +4,16 @@ Mod 4 project: a maze game in React
 TODO 12/21:
 Eddie:
   * ~~modal that pops up when you get to the end lets you retry the maze or go back to the maze list~~
-  * ~~navbar~~ Still want to work on layout and conditional rendering.
+  * ~~navbar~~ Still want to work on layout ~~and conditional rendering.~~
   * ~~creating Attempts to connect Players and Mazes~~ stretch goal: use Attempts to connect high scores with high scorers
   * ~~conditional render / loading spinner for new maze method~~ It says "Loading", which is okay for now
 
 Bilikis:
   * ~~logout method~~
-  * login redirect
+  * ~~login redirect~~
 
 to be cleaned up:
- * don't need row and col attributes in Maze class
+ * ~~don't need row and col attributes in Maze class~~
  * unused routes
  
 A new maze is generated with forked ruby code and stored in backend
