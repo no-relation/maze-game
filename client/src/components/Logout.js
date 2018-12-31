@@ -2,7 +2,9 @@ import React, { Component } from "react";
 
 export class Logout extends Component {
   logoutPlayer = () => {
+    console.log("is this logging out?")
     localStorage.clear();
+    this.props.setCurrentPlayer(null);
   };
 
   goTo = url => {
