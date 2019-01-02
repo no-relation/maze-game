@@ -29,12 +29,11 @@ export class SignUp extends Component {
         }
       })
     })
-      .then(resp => resp.json())
-      .then(result => {
-        console.log(result);
-        localStorage.setItem("token", result.token);
-      });
-    this.setState(this.getInitialState());
+      .then(() => {
+        
+        this.setState(this.getInitialState())
+        this.goTo('/login')
+      })
   };
 
   goTo = url => {
@@ -84,7 +83,7 @@ export class SignUp extends Component {
             onChange={e => this.handleChange(e)}
           />
         </div>
-        <button onClick={() => this.goTo(`/mazes`)}>SignUp</button>
+        <button>SignUp</button>
       </form>
     );
   }
