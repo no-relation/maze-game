@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export class Logout extends Component {
   logoutPlayer = () => {
-    localStorage.clear();
+    localStorage.removeItem('token');
     this.props.setCurrentPlayer(null);
     this.props.history.push("/login");
   };
