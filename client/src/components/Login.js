@@ -56,8 +56,8 @@ export class Login extends Component {
       .then(res => res.json())
       .then(result => {
         localStorage.setItem("token", result.token);
-        this.props.setCurrentPlayer(result.player);
         localStorage.setItem("player", JSON.stringify(result.player));
+        this.props.setCurrentPlayer(result.player);
         this.goTo(`/mazes`);
       });
   };

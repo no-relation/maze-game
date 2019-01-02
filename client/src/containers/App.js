@@ -24,7 +24,6 @@ class App extends Component {
 
   state = {
     currentPlayer: currentPlayer
-
   }
 
   setCurrentPlayer = (player) => {
@@ -36,7 +35,7 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <div className="container">
-            <NavigationBar currentPlayer={this.state.currentPlayer} />
+            <NavigationBar currentPlayer={this.state.currentPlayer} setCurrentPlayer={this.setCurrentPlayer} />
             <Switch>
               <Route path="/login" render={(props) =>  <Login {...props} setCurrentPlayer={this.setCurrentPlayer} />} />
               <Route path="/game" component={Game} />
@@ -47,7 +46,7 @@ class App extends Component {
               <Route path="/logout" render={(props) => <Logout {...props} setCurrentPlayer={this.setCurrentPlayer}/>} />
               <Route path="/mazes/:id" component={Maze} />
               <Route path="/mazes" component={MazeList} />
-              <Route path="/" component={Login} />
+              <Route path="/" render={(props) => <Login {...props} setCurrentPlayer={this.setCurrentPlayer} />} />
             </Switch>
           </div>
         </BrowserRouter>

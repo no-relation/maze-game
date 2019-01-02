@@ -23,7 +23,6 @@ player9 = Player.create(username: "robert", email: "robert@example.com", passwor
 player10 = Player.create(username: "jordan", email: "jordan@example.com", password: "0000")
 player11 = Player.create(username: "joseph", email: "joseph@example.com", password: "0000")
 
-maze3x3 = Maze.create({rows: 3, columns: 3})
-maze4x4 = Maze.create({rows: 4, columns: 4})
-maze5x5 = Maze.create({rows: 5, columns: 5})
 maze10x10 = Maze.create({rows: 10, columns: 10})
+maze15x15 = Maze.create({rows: 15, columns: 15})
+maze20x20 = Maze.create({rows: 20, columns: 20})
