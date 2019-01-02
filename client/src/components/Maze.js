@@ -9,7 +9,8 @@ export class Maze extends Component {
         maze: null, 
         playerPosition: null,
         steps: 0,
-        showWin: false
+        showWin: false,
+        newHighScore: false
     }
 
     handleShow = () => {
@@ -72,28 +73,28 @@ export class Maze extends Component {
                 </div>
                             
                 <h1>{`Steps: ${this.state.steps}`} </h1>
-                <div className='container no-gutter' styles='max-width: 300px' >
+                    <div className='container no-gutter' style={ {width: 510}} >
                     {grid.map((row, index) => {
                         return (
-                            <div className='row align-items-center' key={index} >
-                                    {row.map((nodeID) => {
+                            <div className='row no-gutter' key={index} >
+                                    {row.map((nodeID, index) => {
                                         if (nodeID === 0) {    
                                             return (
-                                                <div className='col' key={this.randomKey()} styles='max-width: 100px'>
+                                                <div className={`float-left`} key={this.randomKey()} style={{width:170}}>
                                                     <img alt={'blank'} src={require(`../tiles/blank.png`)} />
 
                                                 </div>
                                             )
                                         } else if (nodeID==='start') {
                                             return (
-                                            <div className='col' key={nodeID} styles='max-width: 100px'>
-                                                <img alt={'start'} src={require(`../tiles/start.png`)} onClick={this.beginning} />
+                                            <div className={`float-left`} key={nodeID} style={{width:170}}>
+                                                <img alt={'start'} src={require(`../tiles/start.png`)}  />
                                             </div>
                                             )
 
                                         } else if (nodeID==='end') {
                                             return (
-                                            <div className='col' key={nodeID} styles='max-width: 100px'>
+                                            <div className={`float-left`} key={nodeID} style={{width:170}}>
                                                 <img alt={'end'} src={require(`../tiles/end.png`)} width='165px' onClick={this.winning} data-toggle="modal" data-target="winFlag" />
                                             </div>
                                             )
@@ -102,7 +103,7 @@ export class Maze extends Component {
                                             const node = this.findNodeByID(nodeID)
                                             const nodeString = this.getTile(node)
                                             return (
-                                                <div className='col' key={nodeID} styles='max-width: 100px' >
+                                                <div className={`float-left`} key={nodeID} style={{width:170}} >
                                                     <img alt={nodeString} src={require(`../tiles/${nodeString}.png`)} onClick={() => this.handleClick(node)} key={node.id} />
                                                 </div>
                                             )
@@ -211,10 +212,6 @@ export class Maze extends Component {
         return Math.floor(Math.random()*1000)+1
     }
 
-    beginning() {
-        console.log('GO GO GO')
-    }
-
     winning = () => {
         fetch(URL + 'attempts', {
             method: "POST",
@@ -229,10 +226,9 @@ export class Maze extends Component {
                 score: this.state.steps
             })
         })
-            .then(resp => resp.text())
-            .then(response => console.log(response))
 
         if (this.state.maze.high_score === 0 || this.state.steps < this.state.maze.high_score) {
+            this.setState({ newHighScore: true })
             fetch(URL + 'mazes/' + this.mazeID(), {
                 method: 'PATCH',
                 headers: {
@@ -247,11 +243,24 @@ export class Maze extends Component {
         this.handleShow()
     }
 
+    showNewHighScore = () => {
+        if (this.state.newHighScore) {
+            return (
+                <p>You set a new high score!</p>
+            )
+        } else {
+            return (
+                <p>You did not beat the old high score of  </p>
+            )
+        }
+    }
+
     restartMaze = () => {
         this.setState({
             playerPosition: this.state.maze.start_node,
             steps: 0,
-            showWin: false
+            showWin: false,
+            newHighScore:  false
         })
     }
 

@@ -12,29 +12,29 @@ export class NavigationBar extends Component {
       if ((!this.props.currentPlayer) || (this.props.currentPlayer.error === "Please log in")) {
         return (  
           // <Nav className='navbar-right'> 
-          <div>
+          <Nav>
             <LinkContainer to='/signup' >
               <NavItem>Signup</NavItem>
             </LinkContainer>
             <LinkContainer to="/login">
               <NavItem>Login</NavItem>
             </LinkContainer>
-          </div>
+          </Nav>
           // </Nav>  
         )
       } else { 
         return (
           // <Nav className='navbar-right'> 
-          <div>
-            <LinkContainer to="/logout">
-              <NavItem>Logout</NavItem>
-            </LinkContainer>
+          <Nav>
             <LinkContainer to={`/players/${this.props.currentPlayer.id}`}>
               <NavItem>
                   Logged in as {this.props.currentPlayer.username}{" "}
               </NavItem>
             </LinkContainer>
-          </div>
+            <LinkContainer to="/logout">
+              <NavItem>Logout</NavItem>
+            </LinkContainer>
+          </Nav>
           // </Nav>  
         )
       }}
@@ -43,8 +43,8 @@ export class NavigationBar extends Component {
       // if (this.props.currentPlayer) {
         return (
           <div className="App container">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-              <Navbar fluid collapseOnSelect>
+            {/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark"> */}
+              <Navbar inverse fluid collapseOnSelect>
                 <Navbar.Header>
                   <Navbar.Brand>
                     <Link to="/">Maze Game</Link>
@@ -53,20 +53,20 @@ export class NavigationBar extends Component {
                 </Navbar.Header>
 
                 {/* <Navbar.Collapse> */}
-                <Nav bsStyle="tabs" activeKey='1' pullRight>
+                <Nav bsStyle="pills" activeKey='1' pullRight>
                   <LinkContainer to="/mazes">
                     <NavItem> Mazes </NavItem>
                   </LinkContainer>
-                {/* </Nav>
-                <Nav> */}
+                </Nav>
+                <Nav>
                   <LinkContainer to="/players">
                     <NavItem> Players </NavItem>
                   </LinkContainer>
-                  {this.playerLoggedIn()}
                 </Nav>
+                  {this.playerLoggedIn()}
                 {/* </Navbar.Collapse> */}
               </Navbar>
-            </nav>
+            {/* </nav> */}
           </div>
         );
       // } else {
