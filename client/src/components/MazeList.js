@@ -25,8 +25,8 @@ export class MazeList extends Component {
             }
         })
             .then(resp => resp.json())
-            .then(data => this.setState({allMazes: data}))
-    }
+            .then(data => this.setState({ allMazes: data }))
+        }
     componentDidMount() {
         this.getMazes()
     }
@@ -68,8 +68,6 @@ export class MazeList extends Component {
             })
         })
             .then(resp => resp.json())
-            // seems to be taking time, so I'd like a "Loading" message of some kind here
-            // why does this not add the newMaze to allMazes? Is the response not a maze instance?
             .then(receivedMaze => {
                 this.setState({ allMazes: [ ...this.state.allMazes, receivedMaze], isLoading: false })
             })
