@@ -44,23 +44,14 @@ export class Maze extends Component {
             <div>
                 <div>
                     { this.state.showWin &&
-                    <Modal.Dialog onHide={this.handleClose}>
+                    <Modal.Dialog >
                         <Modal.Header>
                             <Modal.Title>You found the exit!</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <p>Your score: {this.state.steps} </p>
-                            <p>High score: {this.state.maze.high_score} </p>
+                            {this.showNewHighScore()}
                             <p>Would you like to try again?</p>
-                            {/* { if (this.state.steps !== 0) {
-                                if (this.state.steps < this.state.maze.high_score) {
-                                   return "You got the high score!" 
-                                } else {
-                                   return "You didn't get the high score."
-                            } else {
-                                return "You got the high score!" 
-
-                            }}} */}
                         </Modal.Body>
                         <Modal.Footer>
                             <button className='btn btn-success' onClick={this.restartMaze}>Try Again?</button>
@@ -250,7 +241,7 @@ export class Maze extends Component {
             )
         } else {
             return (
-                <p>You did not beat the old high score of  </p>
+                <p>You did not beat the old high score of {this.state.maze.high_score} </p>
             )
         }
     }
