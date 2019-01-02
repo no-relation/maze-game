@@ -12,10 +12,19 @@ import { SignUp } from "../components/SignUp";
 import { Logout } from "../components/Logout";
 import { NavigationBar } from "../components/NavigationBar"
 
+let currentPlayer;
+
+try {
+  currentPlayer = JSON.parse(localStorage.getItem('player'))
+
+} catch (error) {
+  console.log('Could not find player')
+}
 class App extends Component {
 
   state = {
-    currentPlayer: null
+    currentPlayer: currentPlayer
+
   }
 
   setCurrentPlayer = (player) => {

@@ -3,7 +3,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 // may need to install JQuery and Popper: https://blog.logrocket.com/how-to-use-bootstrap-with-react-a354715d1121
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// import './index.css';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 
