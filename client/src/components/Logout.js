@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { withRouter, Link } from 'react-router-dom'
 
-export class Logout extends Component {
+class _Logout extends Component {
   logoutPlayer = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('player');
@@ -11,8 +12,10 @@ export class Logout extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.logoutPlayer}>Logout</button>
+        <Link to="/" onClick={this.logoutPlayer}>Logout</Link>
       </div>
     );
   }
 }
+
+export const Logout = withRouter(_Logout)
