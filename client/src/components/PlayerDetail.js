@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 export class PlayerDetail extends Component {
   state = {
-    player: null
+    player: null,
+    isCurrentPlayer: false
   };
 
   playerID() {
@@ -17,9 +18,35 @@ export class PlayerDetail extends Component {
     })
       .then(res => res.json())
       .then(player => {
-        if (!player.error) this.setState({ player });
-        else this.setState({ errorMessage: player.error });
-      });
+        this.setState (state => {
+          state.player = player
+          this.setIsCurrentPlayer()
+          return state
+        })
+      })
+  }
+
+  setIsCurrentPlayer() {
+    if (this.state.player != null) {
+      const currentPlayer = JSON.parse(localStorage.getItem('player'))
+      if (currentPlayer.id.toString() === this.playerID()) {
+        this.setState({ isCurrentPlayer: true })
+      }}
+  }
+
+  renderEditDelete() {
+    if (this.state.isCurrentPlayer) {
+      return (
+        <div>
+          <button className="btn btn-primary" onClick={this.editPlayer}>
+            Edit
+          </button>
+          <button className="btn btn-danger" onClick={this.destroyPlayer}>
+            Delete
+          </button>
+        </div>
+      )
+    }
   }
 
   render() {
@@ -37,12 +64,7 @@ export class PlayerDetail extends Component {
         {/* <img className="img-thumbnail" src={player.image_url} /> */}
         <p>Email: {player.email}</p>
         <p>Password: {player.password}</p>
-        <button className="btn btn-primary" onClick={this.editPlayer}>
-          Edit
-        </button>
-        <button className="btn btn-danger" onClick={this.destroyPlayer}>
-          Delete
-        </button>
+        {this.renderEditDelete()}
       </div>
     );
   }
