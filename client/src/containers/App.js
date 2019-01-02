@@ -43,7 +43,7 @@ class App extends Component {
               <PrivateRoute path="/players/:id/edit" component={PlayerEdit} />
               <PrivateRoute path="/players/:id" component={PlayerDetail} />
               <Route path="/players/" component={PlayerList} />
-              <PrivateRoute path="/signup" component={SignUp} />
+              <Route path="/signup" component={SignUp} />
               <PrivateRoute path="/mazes/:id" component={Maze} />
               <PrivateRoute path="/mazes" component={MazeList} />
               <Route path="/login" render={(props) =>  <Login {...props} setCurrentPlayer={this.setCurrentPlayer} />} />
