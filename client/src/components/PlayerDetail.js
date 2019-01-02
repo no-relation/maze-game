@@ -26,7 +26,7 @@ export class PlayerDetail extends Component {
     let { player, errorMessage } = this.state;
     if (errorMessage)
       return (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           {errorMessage}
         </div>
       );
