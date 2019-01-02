@@ -8,9 +8,9 @@ export class PrivateRoute extends Component {
         return (
             <Route
                 {...rest}
-                render={() => {
+                render={(props) => {
                     const Component = component;
-                    if (token) return <Component />;
+                    if (token) return <Component {...props} />;
                     else {
                         return (
                             <Redirect
