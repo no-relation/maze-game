@@ -1,45 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
+import { Nav, Navbar, NavItem } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 
-import { PlayerList } from "./PlayerList";
-import { Logout } from "./Logout";
+// import { PlayerList } from "./PlayerList";
+// import { Logout } from "./Logout";
 
 export class NavigationBar extends Component {
-
-  componentDidMount() {
-    // fetch(
-    //   `http://localhost:3000/api/v1/players/${localStorage.getItem(
-    //     "playerID"
-    //   )}`,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${localStorage.getItem("token")}`
-    //     }
-    //   }
-    // )
-    //   .then(resp => resp.json())
-    //   .then(player => {
-    //     this.setState({ currentPlayer: player });
-    //   });
-  }
 
     playerLoggedIn = () => {
       if ((!this.props.currentPlayer) || (this.props.currentPlayer.error === "Please log in")) {
         return (  
-          <Nav className='navbar-right'> 
+          // <Nav className='navbar-right'> 
+          <div>
             <LinkContainer to='/signup' >
               <NavItem>Signup</NavItem>
             </LinkContainer>
             <LinkContainer to="/login">
               <NavItem>Login</NavItem>
             </LinkContainer>
-          </Nav>  
+          </div>
+          // </Nav>  
         )
       } else { 
         return (
-          <Nav className='navbar-right'> 
+          // <Nav className='navbar-right'> 
+          <div>
             <LinkContainer to="/logout">
               <NavItem>Logout</NavItem>
             </LinkContainer>
@@ -48,7 +34,8 @@ export class NavigationBar extends Component {
                   Logged in as {this.props.currentPlayer.username}{" "}
               </NavItem>
             </LinkContainer>
-          </Nav>  
+          </div>
+          // </Nav>  
         )
       }}
 
@@ -66,15 +53,17 @@ export class NavigationBar extends Component {
                 </Navbar.Header>
 
                 {/* <Navbar.Collapse> */}
-                <Nav>
+                <Nav bsStyle="tabs" activeKey='1' pullRight>
                   <LinkContainer to="/mazes">
-                    <NavItem>Mazes</NavItem>
+                    <NavItem> Mazes </NavItem>
                   </LinkContainer>
+                {/* </Nav>
+                <Nav> */}
                   <LinkContainer to="/players">
-                    <NavItem>Players</NavItem>
+                    <NavItem> Players </NavItem>
                   </LinkContainer>
-                </Nav>
                   {this.playerLoggedIn()}
+                </Nav>
                 {/* </Navbar.Collapse> */}
               </Navbar>
             </nav>

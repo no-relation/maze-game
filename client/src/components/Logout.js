@@ -2,27 +2,16 @@ import React, { Component } from "react";
 
 export class Logout extends Component {
   logoutPlayer = () => {
-    console.log("is this logging out?")
     localStorage.clear();
     this.props.setCurrentPlayer(null);
-  };
-
-  goTo = url => {
-    this.props.history.push(url);
+    this.props.history.push("/login");
   };
 
   render() {
     return (
-      (
-        <div>
-          <button onClick={this.logoutPlayer}>Logout</button>
-        </div>
-      ),
-      (
-        <div>
-          <button onClick={() => this.goTo(`/login`)}>Logout</button>
-        </div>
-      )
+      <div>
+        <button onClick={this.logoutPlayer}>Logout</button>
+      </div>
     );
   }
 }
