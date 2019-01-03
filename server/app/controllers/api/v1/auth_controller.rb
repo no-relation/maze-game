@@ -9,9 +9,7 @@ class Api::V1::AuthController < Api::V1::ApplicationController
                 player: player
             }
         else
-            render json: {
-                error: 'email or password are incorrect'
-            }
+            render json: { error: 'email or password are incorrect' }, status: 401
         end
     end
 end
