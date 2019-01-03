@@ -18,9 +18,10 @@ export class PlayerDetail extends Component {
     })
       .then(res => res.json())
       .then(player => {
+        const currentPlayerID = JSON.parse(localStorage.getItem('player')).id
         this.setState (state => {
           state.player = player
-          if (player.id.toString() === this.playerID()) {
+          if (player.id === currentPlayerID) {
             state.isCurrentPlayer = true
           }
           return state
