@@ -6,23 +6,23 @@ class Api::V1::AttemptsController < Api::V1::ApplicationController
         render json: attempt
     end
     
-    def index
-        render json: Attempt.all
-    end
+    # def index
+    #     render json: Attempt.all
+    # end
     
-    def show
-        render json: current_attempt
-    end
+    # def show
+    #     render json: current_attempt
+    # end
     
-    def update
-        current_attempt.update(attempt_params)
-        render json: current_attempt
-    end
+    # def update
+    #     current_attempt.update(attempt_params)
+    #     render json: current_attempt
+    # end
     
-    def destroy
-        current_attempt.destroy
-        render json: current_attempt
-    end
+    # def destroy
+    #     current_attempt.destroy
+    #     render json: current_attempt
+    # end
     
     def attempt_params
         params.permit(:player_id, :maze_id, :score)
