@@ -10,7 +10,7 @@ class Api::V1::AuthController < Api::V1::ApplicationController
             }
         else
             render json: {
-                error: 'username or password are incorrect'
+                error: 'email or password are incorrect'
             }
         end
     end
