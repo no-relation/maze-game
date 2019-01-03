@@ -1,3 +1,7 @@
+
+[https://cdn.rawgit.com/actsasbuffoon/maze-js/master/index.html]
+
+/*--
 # maze-game
 Mod 4 project: a maze game in React
 
@@ -42,3 +46,5 @@ Stretch goals:
   * visually differentiating the tiles
   * leaderboard for each maze with top times, instead of single best time
   * animated character (Josh sprite?)
+  
+  --*/
