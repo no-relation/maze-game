@@ -6,7 +6,7 @@ Mazes are randomly generated from a given size using the [recursive backtracing 
 ---
 
 ### Installation
-This project uses PostgreSQL.
+This project uses PostgreSQL for its database.
 
 1. Clone down the repo
 2. Go to the backend directory on the terminal: `cd <DIRECTORY OF CHOICE>/maze-game/server`
