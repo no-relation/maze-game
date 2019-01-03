@@ -29,9 +29,7 @@ export class Maze extends Component {
         fetch(URL + 'mazes/' + this.mazeID(), {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
-            
             }
-
         })
             .then(resp => resp.json())
             .then(maze => this.setState({ maze, playerPosition: maze.start_node }))
@@ -204,6 +202,8 @@ export class Maze extends Component {
     }
 
     winning = () => {
+        const player = JSON.parse(localStorage.getItem('player'))
+        console.log('player id is',player.id)
         fetch(URL + 'attempts', {
             method: "POST",
             headers: {
@@ -212,8 +212,8 @@ export class Maze extends Component {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
-                player_id: localStorage.getItem('playerID'),
-                maze_id: this.mazeID(),
+                player_id: player.id,
+                maze_id: parseInt(this.mazeID()),
                 score: this.state.steps
             })
         })
@@ -241,7 +241,7 @@ export class Maze extends Component {
             )
         } else {
             return (
-                <p>You did not beat the old high score of {this.state.maze.high_score} </p>
+                <p>You did not beat the high score of {this.state.maze.high_score}</p>
             )
         }
     }
