@@ -69,7 +69,7 @@ export class Maze extends Component {
                                     {row.map((nodeID, index) => {
                                         if (nodeID === 0) {    
                                             return (
-                                                <div className={`float-left`} key={this.randomKey()} style={{width:170}}>
+                                                <div className={`float-left`} key={index} style={{width:170}}>
                                                     <img alt={'blank'} src={require(`../tiles/blank.png`)} />
 
                                                 </div>
@@ -195,10 +195,6 @@ export class Maze extends Component {
 
     findNodeByID(nodeID) {
         return this.state.maze.nodes.find((node) => node.id === nodeID)
-    }
-
-    randomKey() {
-        return Math.floor(Math.random()*1000)+1
     }
 
     winning = () => {
