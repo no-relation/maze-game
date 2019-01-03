@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 
 import { Game } from "./Game";
 import { Login } from "../components/Login";
@@ -22,7 +22,8 @@ try {
 } catch (error) {
   console.log('Could not find player')
 }
-class App extends Component {
+
+class _App extends Component {
 
   state = {
     currentPlayer: currentPlayer
@@ -32,29 +33,36 @@ class App extends Component {
     this.setState ({ currentPlayer: player })
   }
 
+  logoutPlayer = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('player');
+    this.setCurrentPlayer(null);
+    this.props.history.push("/login");
+  };
+
   render() {
     return (
       <div className="App">
-        <BrowserRouter>
+        {/* <BrowserRouter> */}
           <div className="container">
-            <NavigationBar currentPlayer={this.state.currentPlayer} setCurrentPlayer={this.setCurrentPlayer} />
+            <NavigationBar currentPlayer={this.state.currentPlayer} setCurrentPlayer={this.setCurrentPlayer} logoutPlayer={this.logoutPlayer} />
             <Switch>
               <PrivateRoute path="/game" component={Game} />
               <PrivateRoute path="/players/:id/edit" component={PlayerEdit} />
-              <PrivateRoute path="/players/:id" component={PlayerDetail} />
-              <Route path="/players/" component={PlayerList} />
+              <PrivateRoute path="/players/:id" component={(props) => <PlayerDetail {...props} logoutPlayer={this.logoutPlayer} /> } />
+              <Route path="/players/" component={PlayerList} /> 
               <Route path="/signup" component={SignUp} />
               <PrivateRoute path="/mazes/:id" component={Maze} />
               <PrivateRoute path="/mazes" component={MazeList} />
               <Route path="/login" render={(props) =>  <Login {...props} setCurrentPlayer={this.setCurrentPlayer} />} />
-              <Route path="/logout" render={(props) => <Logout {...props} setCurrentPlayer={this.setCurrentPlayer}/>} />
+              <Route path="/logout" render={(props) => <Logout {...props} logoutPlayer={this.logoutPlayer}/>} />
               <Route path="/" render={(props) => <Login {...props} setCurrentPlayer={this.setCurrentPlayer} />} />
             </Switch>
           </div>
-        </BrowserRouter>
+        {/* </BrowserRouter> */}
       </div>
     );
   }
 }
 
-export default App;
+export const App = withRouter(_App);

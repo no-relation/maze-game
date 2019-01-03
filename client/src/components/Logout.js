@@ -1,21 +1,14 @@
 import React, { Component } from "react";
-import { withRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-class _Logout extends Component {
-  logoutPlayer = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('player');
-    this.props.setCurrentPlayer(null);
-    this.props.history.push("/login");
-  };
-
+export class Logout extends Component {
   render() {
     return (
       <div>
-        <Link to="/" onClick={this.logoutPlayer}>Logout</Link>
+        <Link to="/" onClick={this.props.logoutPlayer}>Logout</Link>
       </div>
     );
   }
 }
 
-export const Logout = withRouter(_Logout)
+// export const Logout = withRouter(_Logout)

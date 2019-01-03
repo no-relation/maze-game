@@ -203,7 +203,6 @@ export class Maze extends Component {
 
     winning = () => {
         const player = JSON.parse(localStorage.getItem('player'))
-        console.log('player id is',player.id)
         fetch(URL + 'attempts', {
             method: "POST",
             headers: {
