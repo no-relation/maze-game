@@ -4,7 +4,7 @@ export class Login extends Component {
   render() {
     return (
       <form onSubmit={e => this.login(e)}>
-        <h3>Login</h3>
+        {/* <h3>Login</h3>
         <div className="form-group">
           <label className="control-label">Username</label>
           <input
@@ -13,7 +13,7 @@ export class Login extends Component {
             className="form-control"
             type="text"
           />
-        </div>
+        </div> */}
         <div className="form-group">
           <label className="control-label">Email</label>
           <input
