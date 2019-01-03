@@ -20,18 +20,12 @@ export class PlayerDetail extends Component {
       .then(player => {
         this.setState (state => {
           state.player = player
-          this.setIsCurrentPlayer()
+          if (player.id.toString() === this.playerID()) {
+            state.isCurrentPlayer = true
+          }
           return state
         })
       })
-  }
-
-  setIsCurrentPlayer() {
-    if (this.state.player != null) {
-      const currentPlayer = JSON.parse(localStorage.getItem('player'))
-      if (currentPlayer.id.toString() === this.playerID()) {
-        this.setState({ isCurrentPlayer: true })
-      }}
   }
 
   renderEditDelete() {
