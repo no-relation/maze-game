@@ -55,10 +55,14 @@ export class Login extends Component {
     })
       .then(res => res.json())
       .then(result => {
-        localStorage.setItem("token", result.token);
-        localStorage.setItem("player", JSON.stringify(result.player));
-        this.props.setCurrentPlayer(result.player);
-        this.goTo(`/mazes`);
+        if (result === "email or password are incorrect") {
+          console.log(result.error)
+        } else {
+          localStorage.setItem("token", result.token);
+          localStorage.setItem("player", JSON.stringify(result.player));
+          this.props.setCurrentPlayer(result.player);
+          this.goTo(`/mazes`);
+        }
       });
   };
 }
