@@ -55,9 +55,7 @@ export class PlayerDetail extends Component {
     return (
       <div>
         <h3>{player.username}</h3>
-        {/* <img className="img-thumbnail" src={player.image_url} /> */}
         <p>Email: {player.email}</p>
-        <p>Password: {player.password}</p>
         {this.renderEditDelete()}
       </div>
     );
@@ -68,11 +66,12 @@ export class PlayerDetail extends Component {
   };
 
   destroyPlayer = () => {
+
     fetch(`http://localhost:3000/api/v1/players/${this.playerID()}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
-    }).then(() => this.props.history.push(`/players/`));
+    }).then(() => this.props.logoutPlayer())
   };
 }

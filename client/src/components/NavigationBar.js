@@ -27,7 +27,7 @@ export class NavigationBar extends Component {
                 Logged in as {this.props.currentPlayer.username}{" "}
             </NavItem>
           </LinkContainer>
-          <Logout setCurrentPlayer={this.props.setCurrentPlayer} />
+          <Logout logoutPlayer={this.props.logoutPlayer} />
         </Nav>
       )
     }
