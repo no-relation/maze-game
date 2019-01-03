@@ -83,7 +83,7 @@ export class SignUp extends Component {
             onChange={e => this.handleChange(e)}
           />
         </div>
-        <button>SignUp</button>
+        <button className='btn btn-success' >Sign Up</button>
       </form>
     );
   }
