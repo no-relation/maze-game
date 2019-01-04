@@ -14,6 +14,10 @@ This project uses PostgreSQL for its database.
 4. In a different terminal, go to the frontend directory: `cd <DIRECTORY OF CHOICE>/maze-game/client`
 5. Run `npm install && npm start`. It will prompt if you want to use a port other than 3000; hit Y, or just Enter.
 
+---
+
+This was created as the final project in the React module at Flatiron School.
+
 <!--
 # maze-game
 Mod 4 project: a maze game in React
