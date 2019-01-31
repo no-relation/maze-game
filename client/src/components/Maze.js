@@ -104,14 +104,14 @@ export class Maze extends Component {
                                         if (nodeID === this.state.playerPosition.id) { 
                                             playerNodeDiv = <img src={require(`../tiles/${this.state.iconFacing}face.png`)} style={{ width: 50, position: 'relative', top: 20, left: 0, }} alt='You are here' />
                                         } else {
-                                            playerNodeDiv = <img src={require(`../tiles/circle.png`)} style={{ width: 50, position: 'relative', top: 50, left: 0, opacity: 0.50}} alt='You are here' />
+                                            playerNodeDiv = <img src={require(`../tiles/circle.png`)} style={{ width: 50, position: 'relative', top: 50, left: 0, opacity: 0.50}} alt='You can go here' />
                                         }
 
                                         return (
                                             <div className={`float-left`} 
                                                 key={nodeID} 
                                                 style={{ width: 170, height: 170, backgroundImage: 'url(' + require(`../tiles/${nodeString}.png`) + ')' }} 
-                                                onClick={() => this.handleClick(node)} >
+                                                onClick={(e) => this.handleClick(e, node)} >
                                             {playerNodeDiv}
                                             </div>
                                         )
@@ -132,10 +132,22 @@ export class Maze extends Component {
         }
     }
 
-    handleClick(node) {
+    handleClick(e, node) {
+        console.log('x:', e.nativeEvent.clientX, 'y:', e.nativeEvent.clientY)
+        let facing;
+        if (e.nativeEvent.clientY < 300) {
+            facing = 'north'
+        } else if (e.nativeEvent.clientX > 480) {
+            facing = 'east'
+        } else if (e.nativeEvent.clientY > 450) {
+            facing = 'south'
+        } else if (e.nativeEvent.clientX < 315) {
+            facing = 'west'
+        }
         this.setState({ 
             playerPosition: node,
-            steps: this.state.steps + 1 
+            steps: this.state.steps + 1,
+            iconFacing: facing 
         })
     }
 
