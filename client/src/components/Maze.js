@@ -10,7 +10,8 @@ export class Maze extends Component {
         playerPosition: null,
         steps: 0,
         showWin: false,
-        newHighScore: false
+        newHighScore: false,
+        iconFacing: 'east'
     }
 
     handleShow = () => {
@@ -100,7 +101,11 @@ export class Maze extends Component {
                                         const node = this.findNodeByID(nodeID)
                                         const nodeString = this.getTile(node)
                                         let playerNodeDiv = '';
-                                        if (nodeID === this.state.playerPosition.id) { playerNodeDiv = <img src={require("../tiles/eastface.png")} style={{ width: 50, position: 'relative', top: 20, left: 0, }} alt='You are here' />}
+                                        if (nodeID === this.state.playerPosition.id) { 
+                                            playerNodeDiv = <img src={require(`../tiles/${this.state.iconFacing}face.png`)} style={{ width: 50, position: 'relative', top: 20, left: 0, }} alt='You are here' />
+                                        } else {
+                                            playerNodeDiv = <img src={require(`../tiles/circle.png`)} style={{ width: 50, position: 'relative', top: 50, left: 0, opacity: 0.50}} alt='You are here' />
+                                        }
 
                                         return (
                                             <div className={`float-left`} 
