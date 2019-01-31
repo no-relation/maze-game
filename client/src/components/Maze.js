@@ -10,7 +10,8 @@ export class Maze extends Component {
         playerPosition: null,
         steps: 0,
         showWin: false,
-        newHighScore: false
+        newHighScore: false,
+        iconFacing: 'east'
     }
 
     handleShow = () => {
@@ -38,6 +39,7 @@ export class Maze extends Component {
     render() {
         if (this.state.maze) {
             const grid = this.getNeighbors(this.state.playerPosition)
+
             return (
             <div>
                 <div>
@@ -63,41 +65,58 @@ export class Maze extends Component {
                             
                 <h1>{`Steps: ${this.state.steps}`} </h1>
                     <div className='container no-gutter' style={ {width: 510}} >
-                    {grid.map((row, index) => {
+                    {grid.map((row, rindex) => {
                         return (
-                            <div className='row no-gutter' key={index} >
-                                    {row.map((nodeID, index) => {
-                                        if (nodeID === 0) {    
-                                            return (
-                                                <div className={`float-left`} key={index} style={{width:170}}>
-                                                    <img alt={'blank'} src={require(`../tiles/blank.png`)} />
+                            <div className='row no-gutter' key={rindex} >
+                                {row.map((nodeID, tindex) => {
+                                    if (nodeID === 0) {    
+                                        return (
+                                            <div className={`float-left`} 
+                                            key={tindex+3} 
+                                            style={{ width: 170, height: 170, backgroundImage: 'url(' + require('../tiles/blank.png') + ')' }}>
+                                                {/* <img alt={'blank'} src={require(`../tiles/blank.png`)} /> */}
 
-                                                </div>
-                                            )
-                                        } else if (nodeID==='start') {
-                                            return (
-                                            <div className={`float-left`} key={nodeID} style={{width:170}}>
-                                                <img alt={'start'} src={require(`../tiles/start.png`)}  />
                                             </div>
-                                            )
+                                        )
+                                    } else if (nodeID==='start') {
+                                        return (
+                                            <div className={`float-left`} 
+                                            key={nodeID} 
+                                            style={{ width: 170, height: 170, backgroundImage: 'url(' + require('../tiles/start.png') + ')' }}>
+                                        </div>
+                                        )
 
-                                        } else if (nodeID==='end') {
-                                            return (
-                                            <div className={`float-left`} key={nodeID} style={{width:170}}>
-                                                <img alt={'end'} src={require(`../tiles/end.png`)} width='165px' onClick={this.winning} data-toggle="modal" data-target="winFlag" />
-                                            </div>
-                                            )
+                                    } else if (nodeID==='end') {
+                                        return (
+                                            <div className={`float-left`} 
+                                            key={nodeID} 
+                                            style={{ width: 170, height: 170, backgroundImage: 'url(' + require('../tiles/end.png') + ')' }} 
+                                            onClick={this.winning} 
+                                            data-toggle="modal" 
+                                            data-target="winFlag">
+                                        </div>
+                                        )
 
+                                    } else {
+                                        const node = this.findNodeByID(nodeID)
+                                        const nodeString = this.getTile(node)
+                                        let playerNodeDiv = '';
+                                        if (nodeID === this.state.playerPosition.id) { 
+                                            playerNodeDiv = <img src={require(`../tiles/${this.state.iconFacing}face.png`)} style={{ width: 50, position: 'relative', top: 20, left: 0, }} alt='You are here' />
                                         } else {
-                                            const node = this.findNodeByID(nodeID)
-                                            const nodeString = this.getTile(node)
-                                            return (
-                                                <div className={`float-left`} key={nodeID} style={{width:170}} >
-                                                    <img alt={nodeString} src={require(`../tiles/${nodeString}.png`)} onClick={() => this.handleClick(node)} key={node.id} />
-                                                </div>
-                                            )
+                                            playerNodeDiv = <img src={require(`../tiles/circle.png`)} style={{ width: 50, position: 'relative', top: 50, left: 0, opacity: 0.50}} alt='You can go here' />
                                         }
-                                    })}
+
+                                        return (
+                                            <div className={`float-left`} 
+                                                key={nodeID} 
+                                                style={{ width: 170, height: 170, backgroundImage: 'url(' + require(`../tiles/${nodeString}.png`) + ')' }} 
+                                                onClick={(e) => this.handleClick(e, node)} >
+                                            {playerNodeDiv}
+                                            </div>
+                                        )
+                                    }
+                                })}
                             </div>
                         )
                     })}
@@ -113,10 +132,22 @@ export class Maze extends Component {
         }
     }
 
-    handleClick(node) {
+    handleClick(e, node) {
+        console.log('x:', e.nativeEvent.clientX, 'y:', e.nativeEvent.clientY)
+        let facing;
+        if (e.nativeEvent.clientY < 300) {
+            facing = 'north'
+        } else if (e.nativeEvent.clientX > 480) {
+            facing = 'east'
+        } else if (e.nativeEvent.clientY > 450) {
+            facing = 'south'
+        } else if (e.nativeEvent.clientX < 315) {
+            facing = 'west'
+        }
         this.setState({ 
             playerPosition: node,
-            steps: this.state.steps + 1 
+            steps: this.state.steps + 1,
+            iconFacing: facing 
         })
     }
 
