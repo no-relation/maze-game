@@ -39,7 +39,7 @@ export class NavigationBar extends Component {
           <Navbar inverse fluid collapseOnSelect>
             <Navbar.Header>
               <Navbar.Brand>
-                <Link to="/">Maze Game</Link>
+                <Link to="/">Maze Escape</Link>
               </Navbar.Brand>
               {/* <Navbar.Toggle /> */}
             </Navbar.Header>
