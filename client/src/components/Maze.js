@@ -134,14 +134,16 @@ export class Maze extends Component {
 
     handleClick(e, node) {
         let facing;
-        if (e.nativeEvent.clientY < 300) {
+        if (e.nativeEvent.pageY < 300) {
             facing = 'north'
-        } else if (e.nativeEvent.clientX > 480) {
+        } else if (e.nativeEvent.pageX > 480) {
             facing = 'east'
-        } else if (e.nativeEvent.clientY > 450) {
+        } else if (e.nativeEvent.pageY > 450) {
             facing = 'south'
-        } else if (e.nativeEvent.clientX < 315) {
+        } else if (e.nativeEvent.pageX < 315) {
             facing = 'west'
+        } else {
+            facing = 'east'
         }
         this.setState({ 
             playerPosition: node,
