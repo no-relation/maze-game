@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Alert } from "react-bootstrap";
+import { API } from './API.js'
 
 export class Login extends Component {
   
@@ -53,7 +54,7 @@ export class Login extends Component {
 
   login = e => {
     e.preventDefault();
-    fetch("http://localhost:3000/api/v1/auth/", {
+    fetch(`${API}/auth` , {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

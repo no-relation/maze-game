@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { API } from "./API.js"
 
 export class PlayerEdit extends Component {
   state = {
@@ -9,7 +10,7 @@ export class PlayerEdit extends Component {
     e.preventDefault();
     let { usernameInput, emailInput, passwordInput } = e.target;
     let playerID = this.props.match.params.id;
-    fetch(`http://localhost:3000/api/v1/players/${playerID}`, {
+    fetch(`${API}/players/${playerID}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +32,7 @@ export class PlayerEdit extends Component {
   componentDidMount() {
     let playerID = this.props.match.params.id;
 
-    fetch(`http://localhost:3000/api/v1/players/${playerID}`, {
+    fetch(`${API}/players/${playerID}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }

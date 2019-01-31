@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-const playerUrl = "http://localhost:3000/api/v1/players";
+import { API } from "./API.js"
 
 export class PlayerList extends Component {
   state = {
@@ -8,7 +8,7 @@ export class PlayerList extends Component {
   };
 
   componentDidMount() {
-    fetch(playerUrl)
+    fetch(`${API}/players`)
       .then(res => res.json())
       .then(players => {
         this.setState({ players });
