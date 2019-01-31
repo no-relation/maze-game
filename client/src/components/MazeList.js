@@ -19,13 +19,14 @@ export class MazeList extends Component {
     toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
 
     getMazes() {
+        this.setState({ isLoading: true })
         fetch(URL, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
             .then(resp => resp.json())
-            .then(data => this.setState({ allMazes: data }))
+            .then(data => this.setState({ allMazes: data, isLoading: false }))
         }
     componentDidMount() {
         this.getMazes()
