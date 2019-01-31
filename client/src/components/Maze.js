@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap'
 import { Link } from "react-router-dom";
-const URL = 'http://localhost:3000/api/v1/'
+import { API } from "./API.js"
 
 export class Maze extends Component {
 
@@ -27,7 +27,7 @@ export class Maze extends Component {
     }
 
     componentDidMount() {
-        fetch(URL + 'mazes/' + this.mazeID(), {
+        fetch(API + '/mazes/' + this.mazeID(), {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
@@ -133,7 +133,6 @@ export class Maze extends Component {
     }
 
     handleClick(e, node) {
-        console.log('x:', e.nativeEvent.clientX, 'y:', e.nativeEvent.clientY)
         let facing;
         if (e.nativeEvent.clientY < 300) {
             facing = 'north'
@@ -230,7 +229,7 @@ export class Maze extends Component {
 
     winning = () => {
         const player = JSON.parse(localStorage.getItem('player'))
-        fetch(URL + 'attempts', {
+        fetch(API + '/attempts', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -246,7 +245,7 @@ export class Maze extends Component {
 
         if (this.state.maze.high_score === 0 || this.state.steps < this.state.maze.high_score) {
             this.setState({ newHighScore: true })
-            fetch(URL + 'mazes/' + this.mazeID(), {
+            fetch(API + 'mazes/' + this.mazeID(), {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",

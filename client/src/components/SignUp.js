@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { API } from "./API.js"
 
 export class SignUp extends Component {
   constructor() {
@@ -15,7 +16,7 @@ export class SignUp extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    fetch("http://localhost:3000/api/v1/players/", {
+    fetch(`${API}/players/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

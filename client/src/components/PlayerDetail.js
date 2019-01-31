@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { API } from "./API.js"
 
 export class PlayerDetail extends Component {
   state = {
@@ -11,7 +12,7 @@ export class PlayerDetail extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000/api/v1/players/${this.playerID()}`, {
+    fetch(`${API}/players/${this.playerID()}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -68,7 +69,7 @@ export class PlayerDetail extends Component {
 
   destroyPlayer = () => {
 
-    fetch(`http://localhost:3000/api/v1/players/${this.playerID()}`, {
+    fetch(`${API}/players/${this.playerID()}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`

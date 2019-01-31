@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import { FaTrashAlt, FaSpinner } from "react-icons/fa";
-
-const URL = "http://localhost:3000/api/v1/mazes/"
+import { API } from "./API.js"
 
 export class MazeList extends Component {
 
@@ -20,7 +19,7 @@ export class MazeList extends Component {
 
     getMazes() {
         this.setState({ isLoading: true })
-        fetch(URL, {
+        fetch(API + '/mazes/', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
@@ -56,7 +55,7 @@ export class MazeList extends Component {
                 side = 10
         }
 
-        fetch(URL ,{
+        fetch(API + '/mazes/' ,{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -75,7 +74,7 @@ export class MazeList extends Component {
     }
 
     deleteMaze(maze) {
-        fetch(URL + maze.id, {
+        fetch(API + '/mazes/' + maze.id, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
