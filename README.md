@@ -3,6 +3,8 @@
 
 Mazes are randomly generated from a given size using the [recursive backtracing method](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker). You can see [a visualization of the process here](https://cdn.rawgit.com/actsasbuffoon/maze-js/master/index.html), thanks to [actasabuffoon on GitHub](https://github.com/actsasbuffoon/maze-js). I used a Ruby implementation of the method [from sethm on GitHub](https://github.com/sethm/ruby_maze), with modifications to deliver it as a Rails API. The tiles were borrowed from [this guy](http://mojobob.blogspot.com/2010/06/geomorphs.html).
 
+[You can play the game here.](https://maze-escape.herokuapp.com/)
+
 ---
 
 ### Installation
