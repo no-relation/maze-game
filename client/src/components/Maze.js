@@ -247,7 +247,7 @@ export class Maze extends Component {
 
         if (this.state.maze.high_score === 0 || this.state.steps < this.state.maze.high_score) {
             this.setState({ newHighScore: true })
-            fetch(API + 'mazes/' + this.mazeID(), {
+            fetch(API + '/mazes/' + this.mazeID(), {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",

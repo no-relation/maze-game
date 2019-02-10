@@ -39,6 +39,9 @@ export class MazeList extends Component {
         // large = 19-24
         // huge = 25-30
         switch (size) {
+            case 'test':
+                side = 4
+                break;
             case 'small':
                 side = Math.floor(Math.random() * 5) + 7
                 break;
@@ -116,6 +119,7 @@ export class MazeList extends Component {
                         </button>
                         <div className={dropdownClass} aria-labelledby="dropdownMenuButton">
                             <h6 className="dropdown-header">What size?</h6>
+                            {/* <button className="dropdown-item" onClick={() => this.newMaze('test')} >Testing</button> */}
                             <button className="dropdown-item" onClick={() => this.newMaze('small')} >Small</button>
                             <button className="dropdown-item" onClick={() => this.newMaze('medium')} >Medium</button>
                             <button className="dropdown-item" onClick={() => this.newMaze('large')} >Large</button>
