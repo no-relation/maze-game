@@ -133,14 +133,15 @@ export class Maze extends Component {
     }
 
     handleClick(e, node) {
+        console.log('current:', this.state.playerPosition, 'clicked:', node)
         let facing;
-        if (e.nativeEvent.pageY < 300) {
+        if (node.id === this.state.playerPosition.north_neighbor) {
             facing = 'north'
-        } else if (e.nativeEvent.pageX > 480) {
+        } else if (node.id === this.state.playerPosition.east_neighbor) {
             facing = 'east'
-        } else if (e.nativeEvent.pageY > 450) {
+        } else if (node.id === this.state.playerPosition.south_neighbor) {
             facing = 'south'
-        } else if (e.nativeEvent.pageX < 315) {
+        } else if (node.id === this.state.playerPosition.west_neighbor) {
             facing = 'west'
         } else {
             facing = 'east'
@@ -247,7 +248,7 @@ export class Maze extends Component {
 
         if (this.state.maze.high_score === 0 || this.state.steps < this.state.maze.high_score) {
             this.setState({ newHighScore: true })
-            fetch(API + 'mazes/' + this.mazeID(), {
+            fetch(API + '/mazes/' + this.mazeID(), {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
